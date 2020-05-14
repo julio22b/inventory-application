@@ -3,7 +3,11 @@
     {{#each modem_list}}
     <article>
         <h4>{{name}}</h4>
-        <p>{{description}}</p>
+        {{#if description}}
+        <p>{{description}}.</p>
+        {{else}}
+        <p>No description has been provided for this item.</p>
+        {{/if}}
         <p><span class="price">{{price}}</span> | <span class="stock">Stock: {{stock}}</span></p>
     </article>
     {{/each}}
@@ -12,7 +16,11 @@
     {{#each tv_list}}
     <article>
         <h4>{{name}}</h4>
-        <p>{{description}}</p>
+        {{#if description}}
+        <p>{{description}}.</p>
+        {{else}}
+        <p>No description has been provided for this item.</p>
+        {{/if}}
         <p><span class="price">{{price}}</span> | <span class="stock">Stock: {{stock}}</span></p>
     </article>
     {{/each}}

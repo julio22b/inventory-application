@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const elecDevicesController = require('../controllers/elecDevicesController');
 const compAccessoriesController = require('../controllers/computerAccsController');
+const phonesController = require('../controllers/phonesController');
 
 // GET HOME CATALOG WHICH SHOWS ALL CATEGORIES
 router.get('/', function (req, res, next) {
@@ -102,9 +103,7 @@ router.delete('/electronic-devices/:id', function (req, res, next) {
 });
 
 // PHONES CATEGORY
-router.get('/phones', function (req, res, next) {
-    res.send('list of all phones products');
-});
+router.get('/phones', phonesController.phone_list);
 
 // GET DETAIL PAGE OF A SINGLE PRODUCT
 router.get('/phones/:id', function (req, res, next) {

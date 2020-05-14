@@ -9,7 +9,6 @@ exports.elec_devices_list = function (req, res, next) {
         TV.find().sort([['name', 'descending']]),
         Laptop.find().sort([['name', 'descending']]),
     ]).then((lists) => {
-        console.log(lists);
         res.render('electronic_devices', {
             title: 'Electronic Devices',
             modem_list: lists[0],

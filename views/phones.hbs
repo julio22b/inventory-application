@@ -1,10 +1,16 @@
 <h2>{{title}} available</h2>
 <section>
-    {{#each keyboard_list}}
+    {{#each smartphone_list}}
     <article>
         <h4>{{name}}</h4>
         {{#if description}}
-        <p>{{description}}.</p>
+        <ul>
+            <li>OS: {{description.OS}}</li>
+            <li>RAM: {{description.RAM}} GB</li>
+            <li>ROM: {{description.ROM}} GB</li>
+            <li>Battery: {{description.battery}} mAh</li>
+            <li>Cameras: {{description.cameras.camera1}}, {{description.cameras.camera2}}, {{description.cameras.camera3}}</li>
+        </ul>
         {{else}}
         <p>No description has been provided for this item.</p>
         {{/if}}
@@ -13,7 +19,7 @@
     {{/each}}
 </section>
 <section>
-    {{#each mice_list}}
+    {{#each landline_list}}
     <article>
         <h4>{{name}}</h4>
         {{#if description}}
