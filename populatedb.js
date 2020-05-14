@@ -20,7 +20,7 @@ const Keyboard = require('./models/keyboard');
 const Mouse = require('./models/mouse');
 const Television = require('./models/television');
 const Laptop = require('./models/laptop');
-const Brand = require('./models/brand');
+const Category = require('./models/category');
 
 var mongoose = require('mongoose');
 var mongoDB = userArgs[0];
@@ -36,7 +36,24 @@ const keyboards = [];
 const mice = [];
 const televisions = [];
 const laptops = [];
-const brands = [];
+const categories = [];
+
+function categoryCreate(name, description, cb) {
+    const category = new Category({
+        name,
+        description,
+    });
+
+    category.save(function (err) {
+        if (err) {
+            cb(err, null);
+            return;
+        }
+        console.log('New Category: ' + category);
+        categories.push(category);
+        cb(null, category);
+    });
+}
 
 function modemCreate(name, description, category, price, stock, cb) {
     const modem = new Modem({
@@ -212,6 +229,36 @@ function landlinePhoneCreate(name, cb) {
 
 //CREATE MODEMS!!!
 
+function createCategories(cb) {
+    async.series(
+        [
+            function (callback) {
+                categoryCreate(
+                    'Computer Accessories',
+                    'In this category you will find all the accessories that you might ever need for your computer with no accessories',
+                    callback,
+                );
+            },
+            function (callback) {
+                categoryCreate(
+                    'Electronic Devices',
+                    'Here you will be shocked by the powerful TVs, Laptops and Routers that we have to offer',
+                    callback,
+                );
+            },
+            function (callback) {
+                categoryCreate(
+                    'Phones',
+                    'A collection of incredibly incredible smartphones and landline phones (if you remember those)',
+                    callback,
+                );
+            },
+        ],
+        // optional callback
+        cb,
+    );
+}
+
 function createModems(cb) {
     async.series(
         [
@@ -257,34 +304,182 @@ function createSmartphones(cb) {
     async.series(
         [
             function (callback) {
+                const cameras = {
+                    camera1: '64 MP main camera',
+                    camera2: '12 MP ultrawide camera',
+                    camera3: '4 MP macro camera',
+                };
                 smartphoneCreate(
                     'Ultra One Stellar 5G',
                     { OS: 'Android', RAM: 8, ROM: 128, battery: 5000, cameras },
                     'category',
-                    25,
-                    7,
+                    2500,
+                    240,
                     callback,
                 );
             },
             function (callback) {
+                const cameras = {
+                    camera1: '84 MP main camera',
+                    camera2: '24 MP ultrawide camera',
+                    camera3: '16 MP telephoto',
+                };
                 smartphoneCreate(
-                    'ROUTER AWESOME',
-                    'Very efficient router, it does everything it says and more!',
+                    'Increndible Smartphone',
+                    { OS: 'Android', RAM: 16, ROM: 256, battery: 7000, cameras },
                     'category',
-                    30,
-                    16,
+                    3000,
+                    2,
                     callback,
                 );
             },
             function (callback) {
+                const cameras = {
+                    camera1: '13 MP camera',
+                };
                 smartphoneCreate(
                     'MODEM SPECTACULAR',
-                    'Despite its name, this modem is not very spectacular',
+                    { OS: 'Android', RAM: 2, ROM: 16, battery: 3000, cameras },
                     'category',
-                    16,
-                    72,
+                    700,
+                    24,
                     callback,
                 );
+            },
+        ],
+        // optional callback
+        cb,
+    );
+}
+
+function createLandlinePhones(cb) {
+    async.series(
+        [
+            function (callback) {
+                landlinePhoneCreate(
+                    'Imaginary',
+                    'Extremely realistic and touch sensitive phone',
+                    'category',
+                    39,
+                    0,
+                    callback,
+                );
+            },
+        ],
+        // optional callback
+        cb,
+    );
+}
+
+function createKeyboards(cb) {
+    async.series(
+        [
+            function (callback) {
+                keyboardCreate(
+                    'Imaginary',
+                    'Extremely realistic and touch sensitive phone',
+                    'category',
+                    39,
+                    0,
+                    callback,
+                );
+            },
+            function (callback) {
+                keyboardCreate(
+                    'Astonishingly Wireless',
+                    'This wireless phone will allow you to call your mom from anywhere',
+                    'category',
+                    12,
+                    34,
+                    callback,
+                );
+            },
+        ],
+        // optional callback
+        cb,
+    );
+}
+
+function createMice(cb) {
+    async.series(
+        [
+            function (callback) {
+                mouseCreate(
+                    'Buttonful',
+                    `You won't need a keyboard along this mouse thanks to its 136 buttons perfect for any situation`,
+                    'category',
+                    72,
+                    42,
+                    callback,
+                );
+            },
+            function (callback) {
+                mouseCreate(
+                    'Buttonless',
+                    'A mouse entirely made of a screen that is extremely responsive to your fingers',
+                    'category',
+                    340,
+                    6,
+                    callback,
+                );
+            },
+        ],
+        // optional callback
+        cb,
+    );
+}
+
+function createTelevisions(cb) {
+    async.series(
+        [
+            function (callback) {
+                televisionCreate(
+                    'Humungous',
+                    'A 102 inches OLED panel that will immerse you for the rest of your life',
+                    'category',
+                    4341,
+                    2,
+                    callback,
+                );
+            },
+        ],
+        // optional callback
+        cb,
+    );
+}
+
+function createLaptops(cb) {
+    async.series(
+        [
+            function (callback) {
+                const description = {
+                    OS: 'Windows',
+                    RAM: '32',
+                    hard_disk: '500GB SSD',
+                    CPU: 'Stellar 764',
+                    GPU: 'Electric 122',
+                };
+                laptopCreate('XMWD Laptop', description, 'category', 768, 53, callback);
+            },
+            function (callback) {
+                const description = {
+                    OS: 'Linux',
+                    RAM: '8',
+                    hard_disk: '250GB HDD',
+                    CPU: 'Ghostly 340',
+                    GPU: 'Black 78x',
+                };
+                laptopCreate('30th Gen Laptop', description, 'category', 120, 435, callback);
+            },
+            function (callback) {
+                const description = {
+                    OS: 'MacOS',
+                    RAM: '16',
+                    hard_disk: '1TB SSD',
+                    CPU: 'Yeet 3470',
+                    GPU: 'Liquid 90x',
+                };
+                laptopCreate('NwoL Laptop', description, 'category', 1999, 27, callback);
             },
         ],
         // optional callback
@@ -371,92 +566,17 @@ function createBooks(cb) {
     );
 }
 
-function createBookInstances(cb) {
-    async.parallel(
-        [
-            function (callback) {
-                bookInstanceCreate(
-                    books[0],
-                    'London Gollancz, 2014.',
-                    false,
-                    'Available',
-                    callback,
-                );
-            },
-            function (callback) {
-                bookInstanceCreate(books[1], ' Gollancz, 2011.', false, 'Loaned', callback);
-            },
-            function (callback) {
-                bookInstanceCreate(books[2], ' Gollancz, 2015.', false, false, callback);
-            },
-            function (callback) {
-                bookInstanceCreate(
-                    books[3],
-                    'New York Tom Doherty Associates, 2016.',
-                    false,
-                    'Available',
-                    callback,
-                );
-            },
-            function (callback) {
-                bookInstanceCreate(
-                    books[3],
-                    'New York Tom Doherty Associates, 2016.',
-                    false,
-                    'Available',
-                    callback,
-                );
-            },
-            function (callback) {
-                bookInstanceCreate(
-                    books[3],
-                    'New York Tom Doherty Associates, 2016.',
-                    false,
-                    'Available',
-                    callback,
-                );
-            },
-            function (callback) {
-                bookInstanceCreate(
-                    books[4],
-                    'New York, NY Tom Doherty Associates, LLC, 2015.',
-                    false,
-                    'Available',
-                    callback,
-                );
-            },
-            function (callback) {
-                bookInstanceCreate(
-                    books[4],
-                    'New York, NY Tom Doherty Associates, LLC, 2015.',
-                    false,
-                    'Maintenance',
-                    callback,
-                );
-            },
-            function (callback) {
-                bookInstanceCreate(
-                    books[4],
-                    'New York, NY Tom Doherty Associates, LLC, 2015.',
-                    false,
-                    'Loaned',
-                    callback,
-                );
-            },
-            function (callback) {
-                bookInstanceCreate(books[0], 'Imprint XXX2', false, false, callback);
-            },
-            function (callback) {
-                bookInstanceCreate(books[1], 'Imprint XXX3', false, false, callback);
-            },
-        ],
-        // Optional callback
-        cb,
-    );
-}
-
 async.series(
-    [createGenreAuthors, createBooks, createBookInstances],
+    [
+        createCategories,
+        createModems,
+        createSmartphones,
+        createLandlinePhones,
+        createKeyboards,
+        createMice,
+        createTelevisions,
+        createLaptops,
+    ],
     // Optional callback
     function (err, results) {
         if (err) {
