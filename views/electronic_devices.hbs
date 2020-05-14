@@ -1,0 +1,34 @@
+<h2>{{title}} available</h2>
+<section>
+    {{#each modem_list}}
+    <article>
+        <h4>{{name}}</h4>
+        <p>{{description}}</p>
+        <p><span class="price">{{price}}</span> | <span class="stock">Stock: {{stock}}</span></p>
+    </article>
+    {{/each}}
+</section>
+<section>
+    {{#each tv_list}}
+    <article>
+        <h4>{{name}}</h4>
+        <p>{{description}}</p>
+        <p><span class="price">{{price}}</span> | <span class="stock">Stock: {{stock}}</span></p>
+    </article>
+    {{/each}}
+</section>
+<section>
+    {{#each laptop_list}}
+    <article>
+        <h4>{{name}}</h4>
+        <ul>
+            <li>OS: {{description.OS}}</li>
+            <li>RAM: {{description.RAM}}</li>
+            <li>Storage: {{description.hard_disk}}</li>
+            <li>CPU: {{description.CPU}}</li>
+            <li>GPU: {{description.GPU}}</li>
+        </ul>
+        <p><span class="price">{{price}}</span> | <span class="stock">Stock: {{stock}}</span></p>
+    </article>
+    {{/each}}
+</section>
