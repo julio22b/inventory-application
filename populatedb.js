@@ -24,7 +24,7 @@ const Category = require('./models/category');
 
 var mongoose = require('mongoose');
 var mongoDB = userArgs[0];
-mongoose.connect(mongoDB, { useNewUrlParser: true });
+mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -358,8 +358,8 @@ function createKeyboards(cb) {
         [
             function (callback) {
                 keyboardCreate(
-                    'Imaginary',
-                    'Extremely realistic and touch sensitive phone',
+                    'Rectangular',
+                    'A perfectly rectangular keyboard that will enhance your typing because of its rectangularity',
                     categories[0],
                     39,
                     0,
@@ -368,8 +368,8 @@ function createKeyboards(cb) {
             },
             function (callback) {
                 keyboardCreate(
-                    'Astonishingly Wireless',
-                    'This wireless phone will allow you to call your mom from anywhere',
+                    'Circular',
+                    'Some people like to be different, and you can definitely be differet with this keyboard',
                     categories[0],
                     12,
                     34,
@@ -472,13 +472,13 @@ function createLaptops(cb) {
 async.series(
     [
         createCategories,
-        createModems,
         createSmartphones,
+        createModems,
         createLandlinePhones,
-        createKeyboards,
         createMice,
         createTelevisions,
         createLaptops,
+        createKeyboards,
     ],
     // Optional callback
     function (err, results) {

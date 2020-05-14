@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const keyboardSchema = new mongoose.Schema({
     name: { type: String, minlength: 1, required: true },
-    desc: String,
+    description: String,
     category: {
         type: mongoose.Schema.Types.ObjectId,
         minlength: 1,
