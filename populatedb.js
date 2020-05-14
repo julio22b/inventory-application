@@ -39,111 +39,252 @@ const laptops = [];
 const brands = [];
 
 function modemCreate(name, description, category, price, stock, cb) {
-    const modem = new Author({
-        name: name,
+    const modem = new Modem({
+        name,
+        description,
+        category,
+        price,
+        stock,
+    });
+
+    modem.save(function (err) {
+        if (err) {
+            cb(err, null);
+            return;
+        }
+        console.log('New Modem: ' + modem);
+        modems.push(modem);
+        cb(null, modem);
+    });
+}
+
+function smartphoneCreate(name, description, category, price, stock, cb) {
+    const smartphone = new Smartphone({
+        name,
         description: {
-            item1: description.item1,
-            item2: description.item2,
-            item3: description.item3,
+            OS: description.OS,
+            RAM: description.RAM,
+            ROM: description.ROM,
+            battery: description.battery,
+            cameras: {
+                camera1: description.cameras.camera1,
+                camera2: description.cameras.camera2,
+                camera3: description.cameras.camera3,
+            },
         },
-        category: category,
-        price: price,
-        stock: stock,
+        category,
+        price,
+        stock,
     });
 
-    author.save(function (err) {
+    smartphone.save(function (err) {
         if (err) {
             cb(err, null);
             return;
         }
-        console.log('New Author: ' + author);
-        authors.push(author);
-        cb(null, author);
+        console.log('New Smartphone: ' + smartphone);
+        smartphones.push(smartphone);
+        cb(null, smartphone);
     });
 }
 
-function genreCreate(name, cb) {
-    var genre = new Genre({ name: name });
+function landlinePhoneCreate(name, description, category, price, stock, cb) {
+    const landlinePhone = new LandlinePhone({
+        name,
+        description,
+        category,
+        price,
+        stock,
+    });
 
-    genre.save(function (err) {
+    landlinePhone.save(function (err) {
         if (err) {
             cb(err, null);
             return;
         }
-        console.log('New Genre: ' + genre);
-        genres.push(genre);
-        cb(null, genre);
+        console.log('New Landline: ' + landlinePhone);
+        landlinePhones.push(landlinePhone);
+        cb(null, landlinePhone);
     });
 }
 
-function bookCreate(title, summary, isbn, author, genre, cb) {
-    bookdetail = {
-        title: title,
-        summary: summary,
-        author: author,
-        isbn: isbn,
-    };
-    if (genre != false) bookdetail.genre = genre;
+function keyboardCreate(name, description, category, price, stock, cb) {
+    const keyboard = new Keyboard({
+        name,
+        description,
+        category,
+        price,
+        stock,
+    });
 
-    var book = new Book(bookdetail);
-    book.save(function (err) {
+    keyboard.save(function (err) {
         if (err) {
             cb(err, null);
             return;
         }
-        console.log('New Book: ' + book);
-        books.push(book);
-        cb(null, book);
+        console.log('New Keyboard: ' + keyboard);
+        keyboards.push(keyboard);
+        cb(null, keyboard);
     });
 }
 
-function bookInstanceCreate(book, imprint, due_back, status, cb) {
-    bookinstancedetail = {
-        book: book,
-        imprint: imprint,
-    };
-    if (due_back != false) bookinstancedetail.due_back = due_back;
-    if (status != false) bookinstancedetail.status = status;
+function mouseCreate(name, description, category, price, stock, cb) {
+    const mouse = new Mouse({
+        name,
+        description,
+        category,
+        price,
+        stock,
+    });
 
-    var bookinstance = new BookInstance(bookinstancedetail);
-    bookinstance.save(function (err) {
+    mouse.save(function (err) {
         if (err) {
-            console.log('ERROR CREATING BookInstance: ' + bookinstance);
             cb(err, null);
             return;
         }
-        console.log('New BookInstance: ' + bookinstance);
-        bookinstances.push(bookinstance);
-        cb(null, book);
+        console.log('New Mouse: ' + mouse);
+        mice.push(mouse);
+        cb(null, mouse);
     });
 }
 
-function createGenreAuthors(cb) {
+function televisionCreate(name, description, category, price, stock, cb) {
+    const television = new Television({
+        name,
+        description,
+        category,
+        price,
+        stock,
+    });
+
+    television.save(function (err) {
+        if (err) {
+            cb(err, null);
+            return;
+        }
+        console.log('New Television: ' + television);
+        televisions.push(television);
+        cb(null, television);
+    });
+}
+
+function laptopCreate(name, description, category, price, stock, cb) {
+    const laptop = new Laptop({
+        name,
+        description: {
+            OS: description.OS,
+            RAM: description.RAM,
+            hard_disk: description.hard_disk,
+            CPU: description.CPU,
+            GPU: description.GPU,
+        },
+        category,
+        price,
+        stock,
+    });
+
+    laptop.save(function (err) {
+        if (err) {
+            cb(err, null);
+            return;
+        }
+        console.log('New Laptop: ' + laptop);
+        laptops.push(laptop);
+        cb(null, laptop);
+    });
+}
+
+function landlinePhoneCreate(name, cb) {
+    const brand = new Brand({
+        name,
+    });
+
+    brand.save(function (err) {
+        if (err) {
+            cb(err, null);
+            return;
+        }
+        console.log('New Brand: ' + brand);
+        brands.push(brand);
+        cb(null, brand);
+    });
+}
+
+//CREATE MODEMS!!!
+
+function createModems(cb) {
     async.series(
         [
             function (callback) {
-                authorCreate('Patrick', 'Rothfuss', '1973-06-06', false, callback);
+                modemCreate(
+                    'MODEM AMAZING',
+                    'This modem is very good, very fast, and small',
+                    'category',
+                    25,
+                    7,
+                    callback,
+                );
             },
             function (callback) {
-                authorCreate('Ben', 'Bova', '1932-11-8', false, callback);
+                modemCreate(
+                    'ROUTER AWESOME',
+                    'Very efficient router, it does everything it says and more!',
+                    'category',
+                    30,
+                    16,
+                    callback,
+                );
             },
             function (callback) {
-                authorCreate('Isaac', 'Asimov', '1920-01-02', '1992-04-06', callback);
+                modemCreate(
+                    'MODEM SPECTACULAR',
+                    'Despite its name, this modem is not very spectacular',
+                    'category',
+                    16,
+                    72,
+                    callback,
+                );
+            },
+        ],
+        // optional callback
+        cb,
+    );
+}
+
+//CREATE SMARTHPONES
+
+function createSmartphones(cb) {
+    async.series(
+        [
+            function (callback) {
+                smartphoneCreate(
+                    'Ultra One Stellar 5G',
+                    { OS: 'Android', RAM: 8, ROM: 128, battery: 5000, cameras },
+                    'category',
+                    25,
+                    7,
+                    callback,
+                );
             },
             function (callback) {
-                authorCreate('Bob', 'Billings', false, false, callback);
+                smartphoneCreate(
+                    'ROUTER AWESOME',
+                    'Very efficient router, it does everything it says and more!',
+                    'category',
+                    30,
+                    16,
+                    callback,
+                );
             },
             function (callback) {
-                authorCreate('Jim', 'Jones', '1971-12-16', false, callback);
-            },
-            function (callback) {
-                genreCreate('Fantasy', callback);
-            },
-            function (callback) {
-                genreCreate('Science Fiction', callback);
-            },
-            function (callback) {
-                genreCreate('French Poetry', callback);
+                smartphoneCreate(
+                    'MODEM SPECTACULAR',
+                    'Despite its name, this modem is not very spectacular',
+                    'category',
+                    16,
+                    72,
+                    callback,
+                );
             },
         ],
         // optional callback

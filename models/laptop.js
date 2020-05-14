@@ -9,7 +9,12 @@ const laptopSchema = new mongoose.Schema({
         CPU: String,
         GPU: String,
     },
-    category: { type: String, minlength: 1, required: true },
+    category: {
+        type: mongoose.Schema.Types.ObjectId,
+        minlength: 1,
+        required: true,
+        ref: 'Category',
+    },
     price: { type: Number, min: 1, required: true },
     stock: { type: Number, required: true },
 });

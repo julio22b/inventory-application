@@ -1,9 +1,15 @@
 const mongoose = require('mongoose');
+const category = require('./category');
 
 const modemSchema = new mongoose.Schema({
     name: { type: String, minlength: 1, required: true },
-    description: { item1: { type: String }, item2: { type: String }, item3: { type: String } },
-    category: { type: String, minlength: 1, required: true },
+    description: String,
+    category: {
+        type: mongoose.Schema.Types.ObjectId,
+        minlength: 1,
+        required: true,
+        ref: 'Category',
+    },
     price: { type: Number, min: 1, required: true },
     stock: { type: Number, required: true },
 });

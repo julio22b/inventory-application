@@ -9,7 +9,12 @@ const smartPhoneSchema = new mongoose.Schema({
         battery: Number,
         cameras: { camera1: String, camera2: String, camera3: String },
     },
-    category: { type: String, required: true, minlength: 1 },
+    category: {
+        type: mongoose.Schema.Types.ObjectId,
+        minlength: 1,
+        required: true,
+        ref: 'Category',
+    },
     price: { type: Number, required: true, min: 1 },
     stock: { type: Number, required: true },
 });
