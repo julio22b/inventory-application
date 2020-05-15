@@ -14,7 +14,7 @@ const mouseSchema = new mongoose.Schema({
 });
 
 mouseSchema.virtual('url').get(function () {
-    return `/catalog/computer-accessories/${this._id}`;
+    return `/catalog/computer-accessories/item/${this._id}`;
 });
 
 module.exports = mongoose.model('Mouse', mouseSchema);

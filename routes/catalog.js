@@ -12,27 +12,13 @@ router.get('/', categoriesController.category_list);
 router.get('/computer-accessories', compAccessoriesController.comp_accessories_list);
 
 // GET DETAIL PAGE OF A SINGLE PRODUCT
-router.get('/computer-accessories/:id', compAccessoriesController.comp_accessory_detail);
+router.get('/computer-accessories/item/:id', compAccessoriesController.comp_accessory_detail);
 
 // GET CREATE FORM OF KEYBOARD
-router.get('/computer-accessories/keyboard/create', function (req, res, next) {
-    res.send('a form to create a keyboard goes here');
-});
-
-// GET CREATE FORM OF MOUSE
-router.get('/computer-accessories/mouse/create', function (req, res, next) {
-    res.send('a form to create a mouse goes here');
-});
+router.get('/computer-accessories/create', compAccessoriesController.get_comp_accessory_create);
 
 // LOGIC TO CREATE A KEYBOARD GOES HERE
-router.post('/computer-accessories/keyboard/create', function (req, res, next) {
-    res.send('a form to create a keyboard goes here');
-});
-
-// LOGIC TO CREATE A MOUSE GOES HERE
-router.post('/computer-accessories/mouse/create', function (req, res, next) {
-    res.send('a form to create a mouse goes here');
-});
+router.post('/computer-accessories/create', compAccessoriesController.post_comp_accessory_create);
 
 // LOGIC TO UPDATE A KEYBOARD GOES HERE
 router.put('/computer-accessories/:id', function (req, res, next) {
@@ -49,43 +35,17 @@ router.delete('/computer-accessories/:id', function (req, res, next) {
     res.send('i wannna DELETE an ACCESSORY');
 });
 
-// LOGIC TO DELETE A MOUSE GOES HERE
-
 // ELECTRONIC DEVICES CATEGORY
 router.get('/electronic-devices/', elecDevicesController.elec_devices_list);
 
 // GET DETAIL PAGE OF A SINGLE PRODUCT
-router.get('/electronic-devices/:id', elecDevicesController.elec_device_detail);
+router.get('/electronic-devices/item/:id', elecDevicesController.elec_device_detail);
 
 // GET CREATE FORM OF MODEM
-router.get('/electronic-devices/modem/create', function (req, res, next) {
-    res.send('a form to create a MODEM goes here');
-});
-
-// GET CREATE FORM OF TELEVISION
-router.get('/electronic-devices/tv/create', function (req, res, next) {
-    res.send('a form to create a TELEVISION goes here');
-});
-
-// GET CREATE FORM OF LAPTOP
-router.get('/electronic-devices/laptop/create', function (req, res, next) {
-    res.send('a form to create a LAPTOP goes here');
-});
+router.get('/electronic-devices/create', elecDevicesController.get_electronic_device_create);
 
 // LOGIC TO CREATE A MODEM GOES HERE
-router.post('/electronic-devices/modem/create', function (req, res, next) {
-    res.send('a form to create a modem goes here');
-});
-
-// LOGIC TO CREATE A MOUSE GOES HERE
-router.post('/electronic-devices/tv/create', function (req, res, next) {
-    res.send('a form to create a tv goes here');
-});
-
-// LOGIC TO CREATE A MOUSE GOES HERE
-router.post('/electronic-devices/laptop/create', function (req, res, next) {
-    res.send('a form to create a laptop goes here');
-});
+router.post('/electronic-devices/create', elecDevicesController.post_electronic_device_create);
 
 // LOGIC TO UPDATE AN ELECTRONIC DEVICE (LAPTOP, TV, MODEM) GOES HERE
 router.put('/electronic-devices/:id', function (req, res, next) {

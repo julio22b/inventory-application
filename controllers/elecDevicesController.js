@@ -31,3 +31,28 @@ exports.elec_device_detail = function (req, res, next) {
         res.render('elec_device_detail', { item: item });
     });
 };
+
+exports.get_electronic_device_create = function (req, res, next) {
+    Category.find({ name: 'Electronic Devices' }).then((category) => {
+        res.render('create_electronic_device', {
+            title: 'Create an electronic device',
+            category: category[0],
+        });
+    });
+};
+
+exports.post_electronic_device_create = function (req, res, next) {
+    const { name, description, category, price, stock } = req.body;
+    Category.findById(category).then((found) => {
+        const newDevice = new TV({
+            name,
+            description,
+            category: found._id,
+            price,
+            stock,
+        });
+        newDevice.save().then((item) => {
+            res.render('elec_device_detail', { item });
+        });
+    });
+};

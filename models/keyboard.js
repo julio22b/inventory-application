@@ -10,11 +10,11 @@ const keyboardSchema = new mongoose.Schema({
         ref: 'Category',
     },
     price: { type: Number, min: 1, required: true },
-    stock: { type: Number, required: true },
+    stock: { type: Number, min: 0, required: true },
 });
 
 keyboardSchema.virtual('url').get(function () {
-    return `/catalog/computer-accessories/${this._id}`;
+    return `/catalog/computer-accessories/item/${this._id}`;
 });
 
 module.exports = mongoose.model('Keyboard', keyboardSchema);

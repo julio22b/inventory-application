@@ -1,0 +1,15 @@
+<h2>{{title}}</h2>
+<form action="" method="POST" class="create-form">
+    <label for="name">Name: </label>
+    <input type="text" name="name" required minlength="1">
+    <label for="description">Description: </label>
+    <textarea name="description"  cols="30" rows="10"></textarea>
+    <select name="category">
+        <option value="{{category._id}}">{{category.name}}</option>
+    </select>    
+    <label for="price">Price:</label>
+    <input type="number" name="price" required min="1" value="1">
+    <label for="stock">Stock: </label>
+    <input type="number" name="stock" required value="0" min="0">
+    <button>Add</button>
+</form>

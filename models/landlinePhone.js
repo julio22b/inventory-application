@@ -10,7 +10,7 @@ const landlinePhoneSchema = new mongoose.Schema({
         ref: 'Category',
     },
     price: { type: Number, min: 1, required: true },
-    stock: { type: Number, required: true },
+    stock: { type: Number, min: 0, required: true },
 });
 
 landlinePhoneSchema.virtual('url').get(function () {
