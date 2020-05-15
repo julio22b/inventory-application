@@ -12,9 +12,7 @@ router.get('/', categoriesController.category_list);
 router.get('/computer-accessories', compAccessoriesController.comp_accessories_list);
 
 // GET DETAIL PAGE OF A SINGLE PRODUCT
-router.get('/computer-accessories/:id', function (req, res, next) {
-    res.send(`show detail page of the item ${req.params.id}`);
-});
+router.get('/computer-accessories/:id', compAccessoriesController.comp_accessory_detail);
 
 // GET CREATE FORM OF KEYBOARD
 router.get('/computer-accessories/keyboard/create', function (req, res, next) {
@@ -57,9 +55,7 @@ router.delete('/computer-accessories/:id', function (req, res, next) {
 router.get('/electronic-devices/', elecDevicesController.elec_devices_list);
 
 // GET DETAIL PAGE OF A SINGLE PRODUCT
-router.get('/electronic-devices/:id', function (req, res, next) {
-    res.send(`show detail page of the item ${req.params.id}`);
-});
+router.get('/electronic-devices/:id', elecDevicesController.elec_device_detail);
 
 // GET CREATE FORM OF MODEM
 router.get('/electronic-devices/modem/create', function (req, res, next) {
@@ -105,9 +101,7 @@ router.delete('/electronic-devices/:id', function (req, res, next) {
 router.get('/phones', phonesController.phone_list);
 
 // GET DETAIL PAGE OF A SINGLE PRODUCT
-router.get('/phones/:id', function (req, res, next) {
-    res.send(`show detail page of the item ${req.params.id}`);
-});
+router.get('/phones/:id', phonesController.phone_detail);
 
 // GET CREATE FORM OF SMARTPHONE
 router.get('/phones/smartphone/create', function (req, res, next) {
