@@ -5,8 +5,12 @@ const categorySchema = new mongoose.Schema({
     description: String,
 });
 
-categorySchema.virtual('url').get(() => {
-    return `/catalog/categories/${this._id}`;
+categorySchema.virtual('url').get(function () {
+    const url = this.name
+        .split(' ')
+        .map((word) => word.toLowerCase())
+        .join('-');
+    return url;
 });
 
 module.exports = mongoose.model('Category', categorySchema);

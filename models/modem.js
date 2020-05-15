@@ -14,8 +14,8 @@ const modemSchema = new mongoose.Schema({
     stock: { type: Number, required: true },
 });
 
-modemSchema.virtual('url').get(() => {
-    return `/catalog/modems/${this._id}`;
+modemSchema.virtual('url').get(function () {
+    return `/catalog/electronic-devices/${this._id}`;
 });
 
 module.exports = mongoose.model('Modem', modemSchema);

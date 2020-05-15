@@ -13,8 +13,8 @@ const mouseSchema = new mongoose.Schema({
     stock: { type: Number, required: true },
 });
 
-mouseSchema.virtual('url').get(() => {
-    return `/catalog/mouses/${this._id}`;
+mouseSchema.virtual('url').get(function () {
+    return `/catalog/computer-accessories/${this._id}`;
 });
 
 module.exports = mongoose.model('Mouse', mouseSchema);

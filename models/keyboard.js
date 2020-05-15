@@ -13,8 +13,8 @@ const keyboardSchema = new mongoose.Schema({
     stock: { type: Number, required: true },
 });
 
-keyboardSchema.virtual('url').get(() => {
-    return `/catalog/keyboards/${this._id}`;
+keyboardSchema.virtual('url').get(function () {
+    return `/catalog/computer-accessories/${this._id}`;
 });
 
 module.exports = mongoose.model('Keyboard', keyboardSchema);

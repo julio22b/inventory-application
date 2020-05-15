@@ -19,8 +19,8 @@ const smartPhoneSchema = new mongoose.Schema({
     stock: { type: Number, required: true },
 });
 
-smartPhoneSchema.virtual('url').get(() => {
-    return `/catalog/smartphones/${this._id}`;
+smartPhoneSchema.virtual('url').get(function () {
+    return `/catalog/phones/${this._id}`;
 });
 
 module.exports = mongoose.model('Smartphone', smartPhoneSchema);

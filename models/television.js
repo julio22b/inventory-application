@@ -13,8 +13,8 @@ const tvSchema = new mongoose.Schema({
     stock: { type: Number, required: true },
 });
 
-tvSchema.virtual('url').get(() => {
-    return `/catalog/televisions/${this._id}`;
+tvSchema.virtual('url').get(function () {
+    return `/catalog/electronic-devices/${this._id}`;
 });
 
 module.exports = mongoose.model('Television', tvSchema);

@@ -13,8 +13,8 @@ const landlinePhoneSchema = new mongoose.Schema({
     stock: { type: Number, required: true },
 });
 
-landlinePhoneSchema.virtual('url').get(() => {
-    return `/catalog/landlinephones/${this._id}`;
+landlinePhoneSchema.virtual('url').get(function () {
+    return `/catalog/phones/${this._id}`;
 });
 
 module.exports = mongoose.model('Landline', landlinePhoneSchema);

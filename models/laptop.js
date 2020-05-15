@@ -19,8 +19,8 @@ const laptopSchema = new mongoose.Schema({
     stock: { type: Number, required: true },
 });
 
-laptopSchema.virtual('url').get(() => {
-    return `/catalog/laptops/${this._id}`;
+laptopSchema.virtual('url').get(function () {
+    return `/catalog/electronic-devices/${this._id}`;
 });
 
 module.exports = mongoose.model('Laptop', laptopSchema);

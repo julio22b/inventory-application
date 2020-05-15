@@ -320,7 +320,7 @@ function createSmartphones(cb) {
                     camera1: '13 MP camera',
                 };
                 smartphoneCreate(
-                    'MODEM SPECTACULAR',
+                    'Extra Purple 2',
                     { OS: 'Android', RAM: 2, ROM: 16, battery: 3000, cameras },
                     categories[2],
                     700,

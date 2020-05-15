@@ -3,11 +3,10 @@ var router = express.Router();
 const elecDevicesController = require('../controllers/elecDevicesController');
 const compAccessoriesController = require('../controllers/computerAccsController');
 const phonesController = require('../controllers/phonesController');
+const categoriesController = require('../controllers/categoriesController');
 
 // GET HOME CATALOG WHICH SHOWS ALL CATEGORIES
-router.get('/', function (req, res, next) {
-    res.send('catalog with categories goes here');
-});
+router.get('/', categoriesController.category_list);
 
 // COMPUTER ACCESSORIES CATEGORY
 router.get('/computer-accessories', compAccessoriesController.comp_accessories_list);
