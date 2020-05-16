@@ -6,7 +6,18 @@
         <li>RAM: {{item.description.RAM}} GB</li>
         <li>ROM: {{item.description.ROM}} GB</li>
         <li>Battery: {{item.description.battery}} mAh</li>
-        <li>Cameras: {{item.description.cameras.camera1}}, {{item.description.cameras.camera2}}, {{item.description.cameras.camera3}}</li>
+        <li>Cameras: {{item.description.cameras.camera1}} 
+            {{#if item.description.cameras.camera2}}
+            ,{{item.description.cameras.camera2}} 
+            {{/if}}
+            {{#if item.description.cameras.camera3}}
+            ,{{item.description.cameras.camera3}} 
+            {{/if}}
+            </li>
     </ul>
     <p><span class="price">{{item.price}}</span> | <span class="stock">Stock: {{item.stock}}</span></p>
 </article>
+<div class="update-delete-container">
+    <button class="update"><a href="{{item.url}}/update">Update</a></button>
+    <button class="delete"><a href="{{item.url}}/delete">Delete</a></button>
+</div>

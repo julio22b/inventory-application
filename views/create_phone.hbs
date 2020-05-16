@@ -1,0 +1,32 @@
+<h2>{{title}}</h2>
+<form action="" method="POST" class="create-form">
+    <label for="name">Name:</label>
+    <input type="text" name="name" minlength="1" required>
+    <fieldset>
+        <legend>Description: </legend>
+        <label for="OS">OS: </label>
+        <input type="text" name="OS" minlength="3" required>
+        <label for="RAM">RAM: </label>
+        <input type="number" name="RAM" minlength="2" required>
+        <label for="ROM">ROM: </label>
+        <input type="number" name="ROM" minlength="2" required>
+        <label for="battery">Battery: </label>
+        <input type="number" name="battery" minlength="4" required value="2000" step="100">
+        <label for="camera1">Camera: </label>
+        <input type="text" name="camera1" required>
+        <label for="camera2">Camera: </label>
+        <input type="text" name="camera2">
+        <label for="camera3">Camera: </label>
+        <input type="text" name="camera3">
+    </fieldset>
+    
+    <label for="category">Category: </label>
+    <select name="category">
+        <option value="{{category._id}}">{{category.name}}</option>
+    </select>
+    <label for="price">Price: </label>
+    <input type="number" name="price" min="1" required value="1">
+    <label for="stock">Stock: </label>
+    <input type="number" name="stock" min="0" required value="0">
+    <button>Add item</button>
+</form>

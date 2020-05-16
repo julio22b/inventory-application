@@ -20,7 +20,7 @@ const smartPhoneSchema = new mongoose.Schema({
 });
 
 smartPhoneSchema.virtual('url').get(function () {
-    return `/catalog/phones/${this._id}`;
+    return `/catalog/phones/item/${this._id}`;
 });
 
 module.exports = mongoose.model('Smartphone', smartPhoneSchema);

@@ -1,4 +1,4 @@
-<h2><p>{{title}} available</p> <a href="/catalog/phones/create"></a></h2>
+<h2><p>{{title}} available</p> <a href="/catalog/phones/create">Add item</a></h2>
 <section>
     {{#each smartphone_list}}
     <article>
@@ -9,7 +9,14 @@
             <li>RAM: {{description.RAM}} GB</li>
             <li>ROM: {{description.ROM}} GB</li>
             <li>Battery: {{description.battery}} mAh</li>
-            <li>Cameras: {{description.cameras.camera1}}, {{description.cameras.camera2}}, {{description.cameras.camera3}}</li>
+            <li>Cameras: {{description.cameras.camera1}} 
+            {{#if description.cameras.camera2}}
+            ,{{description.cameras.camera2}} 
+            {{/if}}
+            {{#if description.cameras.camera3}}
+            ,{{description.cameras.camera3}} 
+            {{/if}}
+            </li>
         </ul>
         {{else}}
         <p>No description has been provided for this item.</p>

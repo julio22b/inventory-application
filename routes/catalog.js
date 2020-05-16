@@ -61,36 +61,23 @@ router.delete('/electronic-devices/:id', function (req, res, next) {
 router.get('/phones', phonesController.phone_list);
 
 // GET DETAIL PAGE OF A SINGLE PRODUCT
-router.get('/phones/:id', phonesController.phone_detail);
+router.get('/phones/item/:id', phonesController.phone_detail);
 
 // GET CREATE FORM OF SMARTPHONE
-router.get('/phones/smartphone/create', function (req, res, next) {
-    res.send('a form to create a SMARTPHONE goes here');
-});
-
-// GET CREATE FORM OF LANDLINE PHONE
-router.get('/phones/phone/create', function (req, res, next) {
-    res.send('a form to create a LANDLINE PHONE goes here');
-});
+router.get('/phones/create', phonesController.get_phone_create);
 
 // LOGIC TO CREATE A SMARTPHONE GOES HERE
-router.post('/phones/smartphone/create', function (req, res, next) {
-    res.send('a form to create a smartphone goes here');
-});
-
-// LOGIC TO CREATE A LANDLINE PHONE GOES HERE
-router.post('/phones/phone/create', function (req, res, next) {
-    res.send('a form to create a LANDLINE PHONE goes here');
-});
+router.post('/phones/create', phonesController.post_phone_create);
 
 // LOGIC TO UPDATE A PHONE (SMARTPHONE, LANDLINE) GOES HERE
-router.put('/phones/:id', function (req, res, next) {
+router.get('/phones/item/:id/update', function (req, res, next) {
     res.send('i wannna UPDATE an PHONE');
 });
 
 // LOGIC TO DELETE AN PHONE (SMARTPHONE, LANDLINE) GOES HERE
-router.delete('/phones/:id', function (req, res, next) {
-    res.send('i wannna DELETE an PHONE');
-});
+router.get('/phones/item/:id/delete', phonesController.get_phone_delete);
+
+// LOGIC TO DELETE AN PHONE (SMARTPHONE, LANDLINE) GOES HERE
+router.post('/phones/item/:id/delete', phonesController.post_phone_delete);
 
 module.exports = router;
