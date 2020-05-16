@@ -44,7 +44,7 @@ exports.get_electronic_device_create = function (req, res, next) {
 exports.post_electronic_device_create = function (req, res, next) {
     const { name, description, category, price, stock } = req.body;
     Category.findById(category).then((found) => {
-        const newDevice = new TV({
+        const newDevice = new Modem({
             name,
             description,
             category: found._id,
