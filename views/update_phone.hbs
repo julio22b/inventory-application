@@ -1,0 +1,38 @@
+<h2>Make changes to {{item.name}}</h2>
+<form action="" method="POST">
+    <label for="name">Name: </label>
+    <input type="text" name="name" required minlength="1" value="{{item.name}}">
+    <fieldset>
+        <legend>Description: </legend>
+        <label for="OS">OS: </label>
+        <input type="text" name="OS" minlength="1" required value="{{item.description.OS}}">
+        <label for="RAM">RAM: </label>
+        <input type="number" name="RAM" min="1" required value="{{item.description.RAM}}">
+        <label for="ROM">ROM: </label>
+        <input type="number" name="ROM" min="1" required value="{{item.description.ROM}}">
+        <label for="battery">Battery: </label>
+        <input type="number" name="battery" min="1" required value="{{item.description.battery}}">
+        <label for="camera1">Camera: </label>
+        <input type="text" name="camera1" required minlength="1" value="{{item.description.cameras.camera1}}">
+        {{#if item.description.cameras.camera2}}
+        <label for="camera2">Camera: </label>
+        <input type="text" name="camera2" required minlength="1" value="{{item.description.cameras.camera2}}">
+        {{/if}}
+        {{#if item.description.cameras.camera3}}
+        <label for="camera3">Camera: </label>
+        <input type="text" name="camera3" required minlength="1" value="{{item.description.cameras.camera3}}">
+        {{/if}}
+    </fieldset>
+    <label for="category">Category: </label>
+    <select name="category">
+        <option value="{{item.category._id}}">{{item.category.name}}</option>
+    </select>
+    <label for="price">Price: </label>
+    <input type="number" name="price" min="1" required value="{{item.price}}">
+    <label for="stock">Stock: </label>
+    <input type="number" name="stock" min="0" required value="{{item.stock}}">
+    <div class="confirm-update-contain">
+        <button>Update</button>
+        <button type="button"><a href="/catalog/phones">Back to Phones</a></button>
+    </div>
+</form>

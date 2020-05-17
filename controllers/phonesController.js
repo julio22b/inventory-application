@@ -64,9 +64,36 @@ exports.post_phone_delete = function (req, res, next) {
 };
 
 exports.get_phone_update = function (req, res, next) {
-    Smartphone.findById(req.params.id).then((item) => {
-        res.render('update_phone', { item });
-    });
+    Smartphone.findById(req.params.id)
+        .populate('category')
+        .then((item) => {
+            res.render('update_phone', { item });
+        });
 };
 
-exports.post_phone_update = function (req, res, next) {};
+exports.post_phone_update = function (req, res, next) {
+    const cameras = {
+        camera1: req.body.camera1,
+        camera2: req.body.camera2 || '',
+        camera3: req.body.camera3 || '',
+    };
+    const description = {
+        OS: req.body.OS,
+        RAM: req.body.RAM,
+        ROM: req.body.ROM,
+        battery: req.body.battery,
+        cameras,
+    };
+
+    const updatedPhone = {
+        name: req.body.name,
+        description,
+        category: req.body.category,
+        price: req.body.price,
+        stock: req.body.stock,
+    };
+
+    Smartphone.findByIdAndUpdate(req.params.id, updatedPhone).then((updated) => {
+        res.redirect(updated.url);
+    });
+};

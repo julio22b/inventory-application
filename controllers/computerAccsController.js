@@ -46,3 +46,49 @@ exports.post_comp_accessory_create = function (req, res, next) {
         });
     });
 };
+
+exports.get_comp_accessory_delete = function (req, res, next) {
+    Promise.all([Mouse.findById(req.params.id), Keyboard.findById(req.params.id)]).then((found) => {
+        const item = found.filter((doc) => doc !== null);
+        res.render('delete_computer_acc', { item });
+    });
+};
+
+exports.post_comp_accessory_delete = function (req, res, next) {
+    Promise.all([
+        Mouse.findByIdAndDelete(req.params.id),
+        Keyboard.findByIdAndDelete(req.params.id),
+    ]).then((found) => {
+        Promise.all([Mouse.find(), Keyboard.find()]).then((lists) => {
+            res.render('comp_accessories', { mice_list: lists[0], keyboard_list: lists[1] });
+        });
+    });
+};
+
+exports.get_comp_accessory_update = function (req, res, next) {
+    Promise.all([
+        Mouse.findById(req.params.id).populate('category'),
+        Keyboard.findById(req.params.id).populate('category'),
+    ]).then((found) => {
+        const item = found.filter((doc) => doc !== null);
+        res.render('update_computer_acc', { item: item[0] });
+    });
+};
+
+exports.post_comp_accessory_update = function (req, res, next) {
+    const { name, description, category, price, stock } = req.body;
+    const newAcc = {
+        name,
+        description,
+        category,
+        price,
+        stock,
+    };
+    Promise.all([
+        Mouse.findByIdAndUpdate(req.params.id, newAcc),
+        Keyboard.findByIdAndUpdate(req.params.id, newAcc),
+    ]).then((docs) => {
+        const [updated] = docs.filter((doc) => doc !== null);
+        res.redirect(updated.url);
+    });
+};
