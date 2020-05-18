@@ -11,6 +11,7 @@ const mouseSchema = new mongoose.Schema({
     },
     price: { type: Number, min: 1, required: true },
     stock: { type: Number, required: true },
+    file_url: String,
 });
 
 mouseSchema.virtual('url').get(function () {

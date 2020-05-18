@@ -1,5 +1,5 @@
 <h2>{{title}}</h2>
-<form action="" method="POST" class="create-form">
+<form action="" method="POST" class="create-form" enctype="multipart/form-data">
     <label for="name">Name: </label>
     <input type="text" name="name" required minlength="1">
     <label for="description">Description: </label>
@@ -11,5 +11,7 @@
     <input type="number" name="price" required min="1" value="1">
     <label for="stock">Stock: </label>
     <input type="number" name="stock" required value="0" min="0">
+    <label for="image">Image: </label>
+    <input type="file" name="image">
     <button>Add</button>
 </form>

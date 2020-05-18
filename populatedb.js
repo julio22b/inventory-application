@@ -49,7 +49,7 @@ function categoryCreate(name, description, cb) {
     });
 }
 
-function smartphoneCreate(name, description, category, price, stock, cb) {
+function smartphoneCreate(name, description, category, price, stock, file_url, cb) {
     const smartphone = new Smartphone({
         name,
         description: {
@@ -66,6 +66,7 @@ function smartphoneCreate(name, description, category, price, stock, cb) {
         category,
         price,
         stock,
+        file_url,
     });
 
     smartphone.save(function (err) {
@@ -79,13 +80,14 @@ function smartphoneCreate(name, description, category, price, stock, cb) {
     });
 }
 
-function keyboardCreate(name, description, category, price, stock, cb) {
+function keyboardCreate(name, description, category, price, stock, file_url, cb) {
     const keyboard = new Keyboard({
         name,
         description,
         category,
         price,
         stock,
+        file_url,
     });
 
     keyboard.save(function (err) {
@@ -99,13 +101,14 @@ function keyboardCreate(name, description, category, price, stock, cb) {
     });
 }
 
-function mouseCreate(name, description, category, price, stock, cb) {
+function mouseCreate(name, description, category, price, stock, file_url, cb) {
     const mouse = new Mouse({
         name,
         description,
         category,
         price,
         stock,
+        file_url,
     });
 
     mouse.save(function (err) {
@@ -119,13 +122,14 @@ function mouseCreate(name, description, category, price, stock, cb) {
     });
 }
 
-function televisionCreate(name, description, category, price, stock, cb) {
+function televisionCreate(name, description, category, price, stock, file_url, cb) {
     const television = new Television({
         name,
         description,
         category,
         price,
         stock,
+        file_url,
     });
 
     television.save(function (err) {
@@ -186,6 +190,7 @@ function createSmartphones(cb) {
                     categories[2],
                     2500,
                     240,
+                    '/images/mildly-useful-N_xjrdKZPkw-unsplash.jpg',
                     callback,
                 );
             },
@@ -201,6 +206,7 @@ function createSmartphones(cb) {
                     categories[2],
                     3000,
                     2,
+                    '/images/rahul-chakraborty-xsGxhtAsfSA-unsplash.jpg',
                     callback,
                 );
             },
@@ -214,6 +220,7 @@ function createSmartphones(cb) {
                     categories[2],
                     700,
                     24,
+                    '/images/sara-kurfess-6lcT2kRPvnI-unsplash.jpg',
                     callback,
                 );
             },
@@ -233,6 +240,7 @@ function createKeyboards(cb) {
                     categories[0],
                     39,
                     0,
+                    '/images/wesley-tingey-FNhyekndnSM-unsplash.jpg',
                     callback,
                 );
             },
@@ -243,6 +251,7 @@ function createKeyboards(cb) {
                     categories[0],
                     12,
                     34,
+                    '/images/nhu-nguyen-IL1qSqEMNBo-unsplash.jpg',
                     callback,
                 );
             },
@@ -262,6 +271,7 @@ function createMice(cb) {
                     categories[0],
                     72,
                     42,
+                    '/images/rica-naypa-7j-oAysJpo4-unsplash.jpg',
                     callback,
                 );
             },
@@ -272,6 +282,7 @@ function createMice(cb) {
                     categories[0],
                     340,
                     6,
+                    '/images/shagal-sajid-Ox7mSmsljkc-unsplash.jpg',
                     callback,
                 );
             },
@@ -291,6 +302,7 @@ function createTelevisions(cb) {
                     categories[1],
                     4341,
                     2,
+                    '/images/diego-gonzalez--I8lDurtfAo-unsplash.jpg',
                     callback,
                 );
             },

@@ -33,6 +33,9 @@ exports.get_comp_accessory_create = function (req, res, next) {
 
 exports.post_comp_accessory_create = function (req, res, next) {
     const { name, description, category, price, stock } = req.body;
+    const filename = req.file
+        ? `/images/${req.file.filename}`
+        : 'https://via.placeholder.com/400.jpg/f1f5f4/516f4e/?text=Product+Doesn%27t+Have+An+Image+Yet';
     Category.findById(category).then((result) => {
         const newAcc = new Keyboard({
             name,
@@ -40,9 +43,10 @@ exports.post_comp_accessory_create = function (req, res, next) {
             category: result._id,
             price,
             stock,
+            file_url: filename,
         });
         newAcc.save().then((item) => {
-            res.render('computer_accessory_detail', { item });
+            res.redirect(item.url);
         });
     });
 };
@@ -60,7 +64,7 @@ exports.post_comp_accessory_delete = function (req, res, next) {
         Keyboard.findByIdAndDelete(req.params.id),
     ]).then((found) => {
         Promise.all([Mouse.find(), Keyboard.find()]).then((lists) => {
-            res.render('comp_accessories', { mice_list: lists[0], keyboard_list: lists[1] });
+            res.redirect('/catalog/computer-accessories');
         });
     });
 };
@@ -77,18 +81,26 @@ exports.get_comp_accessory_update = function (req, res, next) {
 
 exports.post_comp_accessory_update = function (req, res, next) {
     const { name, description, category, price, stock } = req.body;
-    const newAcc = {
-        name,
-        description,
-        category,
-        price,
-        stock,
-    };
-    Promise.all([
-        Mouse.findByIdAndUpdate(req.params.id, newAcc),
-        Keyboard.findByIdAndUpdate(req.params.id, newAcc),
-    ]).then((docs) => {
-        const [updated] = docs.filter((doc) => doc !== null);
-        res.redirect(updated.url);
-    });
+    Promise.all([Mouse.findById(req.params.id), Keyboard.findById(req.params.id)]).then(
+        (results) => {
+            const [toUpdate] = results.filter((doc) => doc !== null);
+            const file_url = !req.file ? toUpdate.file_url : `/images/${req.file.filename}`;
+
+            const newAcc = {
+                name,
+                description,
+                category,
+                price,
+                stock,
+                file_url,
+            };
+            Promise.all([
+                Mouse.findByIdAndUpdate(req.params.id, newAcc),
+                Keyboard.findByIdAndUpdate(req.params.id, newAcc),
+            ]).then((docs) => {
+                const [updated] = docs.filter((doc) => doc !== null);
+                res.redirect(updated.url);
+            });
+        },
+    );
 };

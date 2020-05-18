@@ -25,6 +25,10 @@ exports.get_phone_create = function (req, res, next) {
 };
 
 exports.post_phone_create = function (req, res, next) {
+    const file_url = req.file
+        ? `/images/${req.file.filename}`
+        : 'https://via.placeholder.com/400.jpg/f1f5f4/516f4e/?text=Product+Doesn%27t+Have+An+Image+Yet';
+
     const cameras = {
         camera1: req.body.camera1,
         camera2: req.body.camera2,
@@ -43,9 +47,10 @@ exports.post_phone_create = function (req, res, next) {
         category: req.body.category,
         price: req.body.price,
         stock: req.body.stock,
+        file_url,
     });
-    newPhone.save().then((result) => {
-        res.render('phone_detail', { item: result });
+    newPhone.save().then((item) => {
+        res.redirect(item.url);
     });
 };
 
@@ -58,7 +63,7 @@ exports.get_phone_delete = function (req, res, next) {
 exports.post_phone_delete = function (req, res, next) {
     Smartphone.findByIdAndRemove(req.params.id).then((deleted) => {
         Smartphone.find().then((docs) => {
-            res.render('phones', { smartphone_list: docs });
+            res.redirect('/catalog/phones');
         });
     });
 };
@@ -85,15 +90,18 @@ exports.post_phone_update = function (req, res, next) {
         cameras,
     };
 
-    const updatedPhone = {
-        name: req.body.name,
-        description,
-        category: req.body.category,
-        price: req.body.price,
-        stock: req.body.stock,
-    };
-
-    Smartphone.findByIdAndUpdate(req.params.id, updatedPhone).then((updated) => {
-        res.redirect(updated.url);
+    Smartphone.findById(req.params.id).then((found) => {
+        const file_url = !req.file ? found.file_url : `/images/${req.file.filename}`;
+        const updatedPhone = {
+            name: req.body.name,
+            description,
+            category: req.body.category,
+            price: req.body.price,
+            stock: req.body.stock,
+            file_url,
+        };
+        Smartphone.findByIdAndUpdate(req.params.id, updatedPhone).then((updated) => {
+            res.redirect(updated.url);
+        });
     });
 };

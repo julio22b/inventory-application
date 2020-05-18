@@ -29,6 +29,9 @@ exports.get_electronic_device_create = function (req, res, next) {
 
 exports.post_electronic_device_create = function (req, res, next) {
     const { name, description, category, price, stock } = req.body;
+    const file_url = req.file
+        ? `/images/${req.file.filename}`
+        : 'https://via.placeholder.com/400.jpg/f1f5f4/516f4e/?text=Product+Doesn%27t+Have+An+Image+Yet';
     Category.findById(category).then((found) => {
         const newDevice = new TV({
             name,
@@ -36,9 +39,10 @@ exports.post_electronic_device_create = function (req, res, next) {
             category: found._id,
             price,
             stock,
+            file_url,
         });
         newDevice.save().then((item) => {
-            res.render('elec_device_detail', { item });
+            res.redirect(item.url);
         });
     });
 };
@@ -52,9 +56,7 @@ exports.get_elec_device_delete = function (req, res, next) {
 exports.post_elec_device_delete = function (req, res, next) {
     TV.findByIdAndDelete(req.params.id).then((deleted) => {
         TV.find().then((list) => {
-            res.render('electronic_devices', {
-                tv_list: list,
-            });
+            res.redirect('/catalog/electronic-devices');
         });
     });
 };
@@ -69,14 +71,18 @@ exports.get_elec_device_update = function (req, res, next) {
 
 exports.post_elec_device_update = function (req, res, next) {
     const { name, description, category, price, stock } = req.body;
-    const updated = {
-        name,
-        description,
-        category,
-        price,
-        stock,
-    };
-    TV.findByIdAndUpdate(req.params.id, updated).then((updated) => {
-        res.redirect(updated.url);
+    TV.findById(req.params.id).then((found) => {
+        const file_url = !req.file ? found.file_url : `/images/${req.file.filename}`;
+        const updated = {
+            name,
+            description,
+            category,
+            price,
+            stock,
+            file_url,
+        };
+        TV.findByIdAndUpdate(req.params.id, updated).then((updated) => {
+            res.redirect(updated.url);
+        });
     });
 };

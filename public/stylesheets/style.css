@@ -25,4 +25,9 @@ a {
 .create-form textarea {
   resize: none;
 }
+
+.product-image {
+  max-width: 500px;
+  height: auto;
+}
 /*# sourceMappingURL=style.css.map */

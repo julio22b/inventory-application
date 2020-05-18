@@ -11,6 +11,7 @@ const keyboardSchema = new mongoose.Schema({
     },
     price: { type: Number, min: 1, required: true },
     stock: { type: Number, min: 0, required: true },
+    file_url: String,
 });
 
 keyboardSchema.virtual('url').get(function () {

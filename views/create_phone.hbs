@@ -1,5 +1,5 @@
 <h2>{{title}}</h2>
-<form action="" method="POST" class="create-form">
+<form action="" method="POST" class="create-form" enctype="multipart/form-data">
     <label for="name">Name:</label>
     <input type="text" name="name" minlength="1" required>
     <fieldset>
@@ -19,7 +19,6 @@
         <label for="camera3">Camera: </label>
         <input type="text" name="camera3">
     </fieldset>
-    
     <label for="category">Category: </label>
     <select name="category">
         <option value="{{category._id}}">{{category.name}}</option>
@@ -28,5 +27,7 @@
     <input type="number" name="price" min="1" required value="1">
     <label for="stock">Stock: </label>
     <input type="number" name="stock" min="0" required value="0">
+    <label for="image">Image: </label>
+    <input type="file" name="image">
     <button>Add item</button>
 </form>

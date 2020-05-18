@@ -1,5 +1,5 @@
 <h2>Make changes to {{item.name}}</h2>
-<form action="" method="POST">
+<form action="" method="POST" class="create-form" enctype="multipart/form-data">
     <label for="name">Name: </label>
     <input type="text" name="name" required minlength="1" value="{{item.name}}">
     <fieldset>
@@ -31,6 +31,10 @@
     <input type="number" name="price" min="1" required value="{{item.price}}">
     <label for="stock">Stock: </label>
     <input type="number" name="stock" min="0" required value="{{item.stock}}">
+    <p>Current image:</p>
+    <img class="product-image" src="{{item.file_url}}" alt="">
+    <label for="image">New image:</label>
+    <input type="file" name="image">
     <div class="confirm-update-contain">
         <button>Update</button>
         <button type="button"><a href="/catalog/phones">Back to Phones</a></button>

@@ -17,6 +17,7 @@ const smartPhoneSchema = new mongoose.Schema({
     },
     price: { type: Number, required: true, min: 1 },
     stock: { type: Number, min: 0, required: true },
+    file_url: String,
 });
 
 smartPhoneSchema.virtual('url').get(function () {
