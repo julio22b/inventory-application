@@ -5,6 +5,7 @@ const compAccessoriesController = require('../controllers/computerAccsController
 const phonesController = require('../controllers/phonesController');
 const categoriesController = require('../controllers/categoriesController');
 const path = require('path');
+const { body } = require('express-validator');
 const multer = require('multer');
 const storage = multer.diskStorage({
     destination:
@@ -35,6 +36,20 @@ router.get('/computer-accessories/create', compAccessoriesController.get_comp_ac
 router.post(
     '/computer-accessories/create',
     upload,
+    [
+        body('name', 'Name must be between 5 and 30 characters')
+            .isLength({ min: 5, max: 30 })
+            .escape(),
+        body('category', 'Choose a category').isLength({ min: 5, max: 30 }).escape(),
+        body('price', 'Price must be higher than 0')
+            .custom((value, { req }) => value > 0)
+            .isNumeric()
+            .escape(),
+        body('stock', 'Stock must be a positive number')
+            .custom((value, { req }) => value > -1)
+            .isNumeric()
+            .escape(),
+    ],
     compAccessoriesController.post_comp_accessory_create,
 );
 
@@ -47,6 +62,20 @@ router.get(
 router.post(
     '/computer-accessories/item/:id/update',
     upload,
+    [
+        body('name', 'Name must be between 5 and 30 characters')
+            .isLength({ min: 5, max: 30 })
+            .escape(),
+        body('category', 'Choose a category').isLength({ min: 5, max: 30 }).escape(),
+        body('price', 'Price must be higher than 0')
+            .custom((value, { req }) => value > 0)
+            .isNumeric()
+            .escape(),
+        body('stock', 'Stock must be a positive number')
+            .custom((value, { req }) => value > -1)
+            .isNumeric()
+            .escape(),
+    ],
     compAccessoriesController.post_comp_accessory_update,
 );
 
@@ -77,6 +106,20 @@ router.get('/electronic-devices/create', elecDevicesController.get_electronic_de
 router.post(
     '/electronic-devices/create',
     upload,
+    [
+        body('name', 'Name must be between 5 and 30 characters')
+            .isLength({ min: 5, max: 30 })
+            .escape(),
+        body('category', 'Choose a category').isLength({ min: 5, max: 30 }).escape(),
+        body('price', 'Price must be higher than 0')
+            .custom((value, { req }) => value > 0)
+            .isNumeric()
+            .escape(),
+        body('stock', 'Stock must be a positive number')
+            .custom((value, { req }) => value > -1)
+            .isNumeric()
+            .escape(),
+    ],
     elecDevicesController.post_electronic_device_create,
 );
 
@@ -86,6 +129,20 @@ router.get('/electronic-devices/item/:id/update', elecDevicesController.get_elec
 router.post(
     '/electronic-devices/item/:id/update',
     upload,
+    [
+        body('name', 'Name must be between 5 and 30 characters')
+            .isLength({ min: 5, max: 30 })
+            .escape(),
+        body('category', 'Choose a category').isLength({ min: 5, max: 30 }).escape(),
+        body('price', 'Price must be higher than 0')
+            .custom((value, { req }) => value > 0)
+            .isNumeric()
+            .escape(),
+        body('stock', 'Stock must be a positive number')
+            .custom((value, { req }) => value > -1)
+            .isNumeric()
+            .escape(),
+    ],
     elecDevicesController.post_elec_device_update,
 );
 
@@ -107,12 +164,98 @@ router.get('/phones/item/:id', phonesController.phone_detail);
 router.get('/phones/create', phonesController.get_phone_create);
 
 // LOGIC TO CREATE A SMARTPHONE GOES HERE
-router.post('/phones/create', upload, phonesController.post_phone_create);
+router.post(
+    '/phones/create',
+    upload,
+    [
+        body('name', 'Name must be between 5 and 30 characters')
+            .isLength({ min: 5, max: 30 })
+            .escape(),
+        body('OS')
+            .isAlphanumeric()
+            .withMessage('OS must contain only alphanumeric characters')
+            .isLength({ min: 3, max: 15 })
+            .withMessage('OS must be between 3 and 15 characters')
+            .escape(),
+        body('RAM')
+            .isNumeric()
+            .custom((val, { req }) => val >= 1)
+            .withMessage('RAM must be a number equal to or higher than 1')
+            .escape(),
+        body('ROM')
+            .isNumeric()
+            .custom((val, { req }) => val >= 8)
+            .withMessage('ROM must be a number equal to or higher than 8')
+            .escape(),
+        body('battery')
+            .isNumeric()
+            .custom((val, { req }) => val >= 2000)
+            .withMessage('Battery must be a number equal to or higher than 2000')
+            .escape(),
+        body('camera1', 'Camera 1 must be at least 3 characters long').escape(),
+        body('category', 'Choose a category').isLength({ min: 5, max: 30 }).escape(),
+        body('camera2').escape(),
+        body('camera3').escape(),
+        body('category', 'Choose a category').isLength({ min: 5, max: 30 }).escape(),
+        body('price', 'Price must be higher than 0')
+            .custom((value, { req }) => value > 0)
+            .isNumeric()
+            .escape(),
+        body('stock', 'Stock must be a positive number')
+            .custom((value, { req }) => value > -1)
+            .isNumeric()
+            .escape(),
+    ],
+    phonesController.post_phone_create,
+);
 
 // LOGIC TO UPDATE A PHONE (SMARTPHONE, LANDLINE) GOES HERE
 router.get('/phones/item/:id/update', phonesController.get_phone_update);
 
-router.post('/phones/item/:id/update', upload, phonesController.post_phone_update);
+router.post(
+    '/phones/item/:id/update',
+    upload,
+    [
+        body('name', 'Name must be between 5 and 30 characters')
+            .isLength({ min: 5, max: 30 })
+            .escape(),
+        body('OS')
+            .isAlphanumeric()
+            .withMessage('OS must contain only alphanumeric characters')
+            .isLength({ min: 3, max: 15 })
+            .withMessage('OS must be between 3 and 15 characters')
+            .escape(),
+        body('RAM')
+            .isNumeric()
+            .custom((val, { req }) => val >= 1)
+            .withMessage('RAM must be a number equal to or higher than 1')
+            .escape(),
+        body('ROM')
+            .isNumeric()
+            .custom((val, { req }) => val >= 8)
+            .withMessage('ROM must be a number equal to or higher than 8')
+            .escape(),
+        body('battery')
+            .isNumeric()
+            .custom((val, { req }) => val >= 2000)
+            .withMessage('Battery must be a number equal to or higher than 2000')
+            .escape(),
+        body('camera1', 'Camera 1 must be at least 3 characters long').escape(),
+        body('category', 'Choose a category').isLength({ min: 5, max: 30 }).escape(),
+        body('camera2').escape(),
+        body('camera3').escape(),
+        body('category', 'Choose a category').isLength({ min: 5, max: 30 }).escape(),
+        body('price', 'Price must be higher than 0')
+            .custom((value, { req }) => value > 0)
+            .isNumeric()
+            .escape(),
+        body('stock', 'Stock must be a positive number')
+            .custom((value, { req }) => value > -1)
+            .isNumeric()
+            .escape(),
+    ],
+    phonesController.post_phone_update,
+);
 
 // LOGIC TO DELETE AN PHONE (SMARTPHONE, LANDLINE) GOES HERE
 router.get('/phones/item/:id/delete', phonesController.get_phone_delete);

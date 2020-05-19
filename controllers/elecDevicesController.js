@@ -1,5 +1,6 @@
 const TV = require('../models/television');
 const Category = require('../models/category');
+const { validationResult } = require('express-validator');
 
 exports.elec_devices_list = function (req, res, next) {
     TV.find()
@@ -29,6 +30,15 @@ exports.get_electronic_device_create = function (req, res, next) {
 
 exports.post_electronic_device_create = function (req, res, next) {
     const { name, description, category, price, stock } = req.body;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.render('create_electronic_device', {
+            title: 'Create an electronic device',
+            errors: errors.errors,
+            item: { name, description, category, price, stock },
+        });
+        return;
+    }
     const file_url = req.file
         ? `/images/${req.file.filename}`
         : 'https://via.placeholder.com/400.jpg/f1f5f4/516f4e/?text=Product+Doesn%27t+Have+An+Image+Yet';
@@ -71,16 +81,25 @@ exports.get_elec_device_update = function (req, res, next) {
 
 exports.post_elec_device_update = function (req, res, next) {
     const { name, description, category, price, stock } = req.body;
-    TV.findById(req.params.id).then((found) => {
-        const file_url = !req.file ? found.file_url : `/images/${req.file.filename}`;
+    const errors = validationResult(req);
+    TV.findById(req.params.id).then((toUpdate) => {
+        const file_url = !req.file ? toUpdate.file_url : `/images/${req.file.filename}`;
+        toUpdate.populate('Category');
         const updated = {
             name,
             description,
-            category,
+            category: toUpdate.category,
             price,
             stock,
             file_url,
         };
+        if (!errors.isEmpty()) {
+            res.render('update_elec_device', {
+                errors: errors.errors,
+                item: { ...updated },
+            });
+            return;
+        }
         TV.findByIdAndUpdate(req.params.id, updated).then((updated) => {
             res.redirect(updated.url);
         });

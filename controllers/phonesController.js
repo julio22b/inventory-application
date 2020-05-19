@@ -1,5 +1,6 @@
 const Smartphone = require('../models/smartphone');
 const Category = require('../models/category');
+const { validationResult } = require('express-validator');
 
 exports.phone_list = function (req, res, next) {
     Smartphone.find()
@@ -25,10 +26,10 @@ exports.get_phone_create = function (req, res, next) {
 };
 
 exports.post_phone_create = function (req, res, next) {
+    const errors = validationResult(req);
     const file_url = req.file
         ? `/images/${req.file.filename}`
         : 'https://via.placeholder.com/400.jpg/f1f5f4/516f4e/?text=Product+Doesn%27t+Have+An+Image+Yet';
-
     const cameras = {
         camera1: req.body.camera1,
         camera2: req.body.camera2,
@@ -49,6 +50,14 @@ exports.post_phone_create = function (req, res, next) {
         stock: req.body.stock,
         file_url,
     });
+    if (!errors.isEmpty()) {
+        res.render('create_phone', {
+            title: 'Add a new phone',
+            item: newPhone,
+            errors: errors.errors,
+        });
+        return;
+    }
     newPhone.save().then((item) => {
         res.redirect(item.url);
     });
@@ -77,6 +86,7 @@ exports.get_phone_update = function (req, res, next) {
 };
 
 exports.post_phone_update = function (req, res, next) {
+    const errors = validationResult(req);
     const cameras = {
         camera1: req.body.camera1,
         camera2: req.body.camera2 || '',
@@ -90,16 +100,24 @@ exports.post_phone_update = function (req, res, next) {
         cameras,
     };
 
-    Smartphone.findById(req.params.id).then((found) => {
-        const file_url = !req.file ? found.file_url : `/images/${req.file.filename}`;
+    Smartphone.findById(req.params.id).then((toUpdate) => {
+        const file_url = !req.file ? toUpdate.file_url : `/images/${req.file.filename}`;
+        toUpdate.populate('Category');
         const updatedPhone = {
             name: req.body.name,
             description,
-            category: req.body.category,
+            category: toUpdate.category,
             price: req.body.price,
             stock: req.body.stock,
             file_url,
         };
+        if (!errors.isEmpty()) {
+            res.render('update_phone', {
+                item: updatedPhone,
+                errors: errors.errors,
+            });
+            return;
+        }
         Smartphone.findByIdAndUpdate(req.params.id, updatedPhone).then((updated) => {
             res.redirect(updated.url);
         });

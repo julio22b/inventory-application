@@ -1,6 +1,7 @@
 const Keyboard = require('../models/keyboard');
 const Mouse = require('../models/mouse');
 const Category = require('../models/category');
+const { validationResult } = require('express-validator');
 
 exports.comp_accessories_list = function (req, res, next) {
     Promise.all([
@@ -33,6 +34,21 @@ exports.get_comp_accessory_create = function (req, res, next) {
 
 exports.post_comp_accessory_create = function (req, res, next) {
     const { name, description, category, price, stock } = req.body;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.render('create_computer_accessory', {
+            title: 'Create a computer accessory',
+            errors: errors.errors,
+            item: {
+                name,
+                description,
+                category,
+                price,
+                stock,
+            },
+        });
+        return;
+    }
     const filename = req.file
         ? `/images/${req.file.filename}`
         : 'https://via.placeholder.com/400.jpg/f1f5f4/516f4e/?text=Product+Doesn%27t+Have+An+Image+Yet';
@@ -81,19 +97,29 @@ exports.get_comp_accessory_update = function (req, res, next) {
 
 exports.post_comp_accessory_update = function (req, res, next) {
     const { name, description, category, price, stock } = req.body;
+    const errors = validationResult(req);
+
     Promise.all([Mouse.findById(req.params.id), Keyboard.findById(req.params.id)]).then(
         (results) => {
             const [toUpdate] = results.filter((doc) => doc !== null);
             const file_url = !req.file ? toUpdate.file_url : `/images/${req.file.filename}`;
-
+            toUpdate.populate('Category');
             const newAcc = {
                 name,
                 description,
-                category,
+                category: toUpdate.category,
                 price,
                 stock,
                 file_url,
             };
+            if (!errors.isEmpty()) {
+                res.render('update_computer_acc', {
+                    errors: errors.errors,
+                    item: newAcc,
+                });
+                return;
+            }
+
             Promise.all([
                 Mouse.findByIdAndUpdate(req.params.id, newAcc),
                 Keyboard.findByIdAndUpdate(req.params.id, newAcc),

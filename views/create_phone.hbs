@@ -1,4 +1,38 @@
 <h2>{{title}}</h2>
+{{#if item}}
+<form action="" method="POST" class="create-form" enctype="multipart/form-data">
+    <label for="name">Name:</label>
+    <input type="text" name="name" minlength="1" required value="{{item.name}}">
+    <fieldset>
+        <legend>Description: </legend>
+        <label for="OS">OS: </label>
+        <input type="text" name="OS" minlength="3" required value="{{item.description.OS}}">
+        <label for="RAM">RAM: </label>
+        <input type="number" name="RAM" min="1" value="1" required value="{{item.description.RAM}}">
+        <label for="ROM">ROM: </label>
+        <input type="number" name="ROM" min="8" value="8" required value="{{item.description.ROM}}">
+        <label for="battery">Battery: </label>
+        <input type="number" name="battery" minlength="4" required value="2000" step="100" value="{{item.description.battery}}">
+        <label for="camera1">Camera: </label>
+        <input type="text" name="camera1" required minlength="3" value="{{item.description.cameras.camera1}}">
+        <label for="camera2">Camera: </label>
+        <input type="text" name="camera2" value="{{item.description.cameras.camera2}}">
+        <label for="camera3">Camera: </label>
+        <input type="text" name="camera3" value="{{item.description.cameras.camera3}}">
+    </fieldset>
+    <label for="category">Category: </label>
+    <select name="category">
+        <option value="{{item.category}}">Phones</option>
+    </select>
+    <label for="price">Price: </label>
+    <input type="number" name="price" min="1" required value="{{item.price}}">
+    <label for="stock">Stock: </label>
+    <input type="number" name="stock" min="0" required value="{{item.stock}}">
+    <label for="image">Image: </label>
+    <input type="file" name="image">
+    <button>Add item</button>
+</form>
+{{else}}
 <form action="" method="POST" class="create-form" enctype="multipart/form-data">
     <label for="name">Name:</label>
     <input type="text" name="name" minlength="1" required>
@@ -7,13 +41,13 @@
         <label for="OS">OS: </label>
         <input type="text" name="OS" minlength="3" required>
         <label for="RAM">RAM: </label>
-        <input type="number" name="RAM" minlength="2" required>
+        <input type="number" name="RAM" min="1" value="1" required>
         <label for="ROM">ROM: </label>
-        <input type="number" name="ROM" minlength="2" required>
+        <input type="number" name="ROM" min="8" value="8" required>
         <label for="battery">Battery: </label>
         <input type="number" name="battery" minlength="4" required value="2000" step="100">
         <label for="camera1">Camera: </label>
-        <input type="text" name="camera1" required>
+        <input type="text" name="camera1" required minlength="3">
         <label for="camera2">Camera: </label>
         <input type="text" name="camera2">
         <label for="camera3">Camera: </label>
@@ -31,3 +65,12 @@
     <input type="file" name="image">
     <button>Add item</button>
 </form>
+{{/if}}
+
+{{#if errors}}
+<ul>
+    {{#each errors}}
+    <li>{{msg}}</li>
+    {{/each}}
+</ul>
+{{/if}}
