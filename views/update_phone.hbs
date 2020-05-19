@@ -1,4 +1,11 @@
 <h2>Make changes to {{item.name}}</h2>
+{{#if errors}}
+<ul>
+    {{#each errors}}
+    <li>{{msg}}</li>
+    {{/each}}
+</ul>
+{{/if}}
 <form action="" method="POST" class="create-form" enctype="multipart/form-data">
     <label for="name">Name: </label>
     <input type="text" name="name" required minlength="1" value="{{item.name}}">
@@ -35,15 +42,10 @@
     <img class="product-image" src="{{item.file_url}}" alt="">
     <label for="image">New image:</label>
     <input type="file" name="image">
+    <label for="password">Password: </label>
+    <input type="password" name="password">
     <div class="confirm-update-contain">
         <button>Update</button>
         <button type="button"><a href="/catalog/phones">Back to Phones</a></button>
     </div>
 </form>
-{{#if errors}}
-<ul>
-    {{#each errors}}
-    <li>{{msg}}</li>
-    {{/each}}
-</ul>
-{{/if}}

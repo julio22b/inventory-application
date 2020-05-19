@@ -75,13 +75,21 @@ exports.get_comp_accessory_delete = function (req, res, next) {
 };
 
 exports.post_comp_accessory_delete = function (req, res, next) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        Promise.all([Mouse.findById(req.params.id), Keyboard.findById(req.params.id)]).then(
+            (docs) => {
+                const item = docs.filter((doc) => doc !== null);
+                res.render('delete_computer_acc', { errors: errors.errors, item });
+            },
+        );
+        return;
+    }
     Promise.all([
         Mouse.findByIdAndDelete(req.params.id),
         Keyboard.findByIdAndDelete(req.params.id),
     ]).then((found) => {
-        Promise.all([Mouse.find(), Keyboard.find()]).then((lists) => {
-            res.redirect('/catalog/computer-accessories');
-        });
+        res.redirect('/catalog/computer-accessories');
     });
 };
 

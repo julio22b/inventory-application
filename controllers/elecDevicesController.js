@@ -64,10 +64,15 @@ exports.get_elec_device_delete = function (req, res, next) {
 };
 
 exports.post_elec_device_delete = function (req, res, next) {
-    TV.findByIdAndDelete(req.params.id).then((deleted) => {
-        TV.find().then((list) => {
-            res.redirect('/catalog/electronic-devices');
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        TV.findById(req.params.id).then((item) => {
+            res.render('delete_elec_device', { errors: errors.errors, item });
         });
+        return;
+    }
+    TV.findByIdAndDelete(req.params.id).then((deleted) => {
+        res.redirect('/catalog/electronic-devices');
     });
 };
 

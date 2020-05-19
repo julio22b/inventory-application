@@ -1,7 +1,14 @@
 <h2>Are you sure you want to remove {{item.name}}?</h2>
+{{#if errors}}
+<ul>
+    {{#each errors}}
+    <li>{{msg}}</li>
+    {{/each}}
+</ul>
+{{/if}}
 <form action="" method="POST">
     <label for="password">Password: </label>
-    <input type="text" name="password">
+    <input type="password" name="password">
     <div class="confirm-del-container">
         <button>Yes</button>
         <button type="button"><a href="/catalog/phones/">No</a></button>

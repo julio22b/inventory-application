@@ -75,6 +75,9 @@ router.post(
             .custom((value, { req }) => value > -1)
             .isNumeric()
             .escape(),
+        body('password', 'Incorrect Password')
+            .custom((val, { req }) => val === process.env.PASSWORD)
+            .escape(),
     ],
     compAccessoriesController.post_comp_accessory_update,
 );
@@ -87,6 +90,11 @@ router.get(
 
 router.post(
     '/computer-accessories/item/:id/delete',
+    [
+        body('password', 'Incorrect Password')
+            .custom((val, { req }) => val === process.env.PASSWORD)
+            .escape(),
+    ],
     compAccessoriesController.post_comp_accessory_delete,
 );
 
@@ -142,6 +150,9 @@ router.post(
             .custom((value, { req }) => value > -1)
             .isNumeric()
             .escape(),
+        body('password', 'Incorrect Password')
+            .custom((val, { req }) => val === process.env.PASSWORD)
+            .escape(),
     ],
     elecDevicesController.post_elec_device_update,
 );
@@ -149,7 +160,15 @@ router.post(
 // LOGIC TO DELETE AN ELECTRONIC DEVICE (LAPTOP, TV, MODEM) GOES HERE
 router.get('/electronic-devices/item/:id/delete', elecDevicesController.get_elec_device_delete);
 
-router.post('/electronic-devices/item/:id/delete', elecDevicesController.post_elec_device_delete);
+router.post(
+    '/electronic-devices/item/:id/delete',
+    [
+        body('password', 'Incorrect Password')
+            .custom((val, { req }) => val === process.env.PASSWORD)
+            .escape(),
+    ],
+    elecDevicesController.post_elec_device_delete,
+);
 
 //
 //
@@ -253,6 +272,9 @@ router.post(
             .custom((value, { req }) => value > -1)
             .isNumeric()
             .escape(),
+        body('password', 'Incorrect Password')
+            .custom((val, { req }) => val === process.env.PASSWORD)
+            .escape(),
     ],
     phonesController.post_phone_update,
 );
@@ -261,6 +283,14 @@ router.post(
 router.get('/phones/item/:id/delete', phonesController.get_phone_delete);
 
 // LOGIC TO DELETE AN PHONE (SMARTPHONE, LANDLINE) GOES HERE
-router.post('/phones/item/:id/delete', phonesController.post_phone_delete);
+router.post(
+    '/phones/item/:id/delete',
+    [
+        body('password', 'Incorrect Password')
+            .custom((val, { req }) => val === process.env.PASSWORD)
+            .escape(),
+    ],
+    phonesController.post_phone_delete,
+);
 
 module.exports = router;

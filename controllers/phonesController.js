@@ -70,10 +70,15 @@ exports.get_phone_delete = function (req, res, next) {
 };
 
 exports.post_phone_delete = function (req, res, next) {
-    Smartphone.findByIdAndRemove(req.params.id).then((deleted) => {
-        Smartphone.find().then((docs) => {
-            res.redirect('/catalog/phones');
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        Smartphone.findById(req.params.id).then((item) => {
+            res.render('delete_phone', { item, errors: errors.errors });
         });
+        return;
+    }
+    Smartphone.findByIdAndRemove(req.params.id).then((deleted) => {
+        res.redirect('/catalog/phones');
     });
 };
 
