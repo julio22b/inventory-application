@@ -1,12 +1,21 @@
-<h2>Make changes to {{item.name}}</h2>
-{{#if errors}}
+<h2 class="update-product-title"><span class="light">Make changes to &ThinSpace;</span>{{item.name}}</h2>
 <ul>
-    {{#each errors}}
-    <li>{{msg}}</li>
-    {{/each}}
+    <li>
+        <a class="back-to-categories" href="/catalog/electronic-devices">&leftarrow; Back to Electronic Devices</a>
+    </li>
+    <li>
+        <a class="back-to-categories" href="/catalog/">&leftarrow; Look at Categories</a>
+    </li>
 </ul>
-{{/if}}
+
 <form action="" method="POST" class="create-form" enctype="multipart/form-data">
+    {{#if errors}}
+    <ul class="error-list create-form-errors">
+        {{#each errors}}
+        <li>{{msg}}</li>
+        {{/each}}
+    </ul>
+    {{/if}}
     <label for="name">Name: </label>
     <input type="text" name="name" minlength="1" required value="{{item.name}}">
     <label for="description">Description: </label>
@@ -19,14 +28,14 @@
     <input type="number" name="price" required min="1" value="{{item.price}}">
     <label for="stock">Stock: </label>
     <input type="number" name="stock" required min="0" value="{{item.stock}}">
-    <p>Current image:</p>
-    <img class="product-image" src="{{item.file_url}}" alt="">
+    <p class="current-image">Current image:</p>
+    <img class="product-image image-update-form" src="{{item.file_url}}" alt="">
     <label for="image">New image:</label>
     <input type="file" name="image">
     <label for="password">Password: </label>
     <input type="password" name="password">
     <div class="confirm-update-contain">
-        <button>Update</button>
+        <button class="add-item">Update</button>
         <button type="button"><a href="/catalog/electronic-devices">Back to Electronic Devices</a></button>
     </div>
 </form>

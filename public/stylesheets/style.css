@@ -72,6 +72,7 @@ h2 {
   transition: all 250ms ease-in;
   -webkit-box-shadow: 0 0 5px #6f8c6c;
           box-shadow: 0 0 5px #6f8c6c;
+  margin: 5px 0;
 }
 
 .add-item:hover {
@@ -81,7 +82,7 @@ h2 {
 .add-item a {
   text-decoration: none;
   color: #c3e7c9;
-  padding: 0 15px;
+  padding: 5px 15px;
   width: 100%;
   height: 100%;
   display: -webkit-box;
@@ -202,6 +203,7 @@ section article figcaption p .stock {
 
 .product-detail figure h2 {
   margin-bottom: 0.3em;
+  letter-spacing: 2px;
 }
 
 .product-detail figure figcaption {
@@ -237,14 +239,9 @@ section article figcaption p .stock {
 }
 
 .product-detail .update-delete-container button {
-  padding: 5px;
+  margin-top: 0;
+  margin-bottom: 0;
   margin-right: 20px;
-}
-
-.product-detail .update-delete-container button a {
-  display: inline-block;
-  width: 100%;
-  height: 100%;
 }
 
 .product-detail .update-delete-container .delete {
@@ -260,7 +257,7 @@ section article figcaption p .stock {
   text-align: center;
 }
 
-.delete-confirmation .light {
+.light {
   font-size: #6f8c6c;
   font-weight: normal;
 }
@@ -433,12 +430,36 @@ section article figcaption p .stock {
   font-size: 1.3rem;
 }
 
+.create-form fieldset {
+  margin-bottom: 30px;
+}
+
 .create-form fieldset label {
   margin-right: 10px;
 }
 
 .create-form fieldset input {
   width: 100%;
+}
+
+.create-form fieldset input:last-child {
+  margin-bottom: 0;
+}
+
+.create-form fieldset .rr-bat label {
+  margin-right: 50px;
+}
+
+.create-form fieldset .rr-bat input {
+  width: 18%;
+}
+
+.create-form fieldset .rr-bat input:last-child {
+  width: 22%;
+}
+
+.create-form fieldset .stretch input {
+  width: 80%;
 }
 
 .create-form fieldset div {
@@ -456,9 +477,51 @@ section article figcaption p .stock {
   font-weight: bold;
 }
 
-.create-form-title {
+.create-form-title,
+.update-product-title {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.current-image {
+  font-weight: bold;
+}
+
+.image-update-form {
+  margin: 1em auto;
+  -webkit-box-shadow: 0 0 5px #858585;
+          box-shadow: 0 0 5px #858585;
+}
+
+.confirm-update-contain {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.confirm-update-contain button {
+  font-size: 1rem;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin: 0;
+}
+
+.confirm-update-contain button:hover {
+  color: #254425;
+}
+
+.confirm-update-contain button:last-child {
+  background-color: #c3e7c9;
+  opacity: 0.85;
+}
+
+.confirm-update-contain button:last-child a {
+  font-size: 0.8rem;
+  color: #254425;
+  text-decoration: none;
 }
 /*# sourceMappingURL=style.css.map */

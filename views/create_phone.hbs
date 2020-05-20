@@ -20,29 +20,27 @@
     <input type="text" name="name" minlength="1" required value="{{item.name}}">
     <fieldset>
         <legend>&ThickSpace;&ThickSpace;Description:&ThickSpace;&ThickSpace; </legend>
-        <div>
+        <div class="price-stock stretch">
             <label for="OS">OS: </label>
             <input type="text" name="OS" minlength="3" required value="{{item.description.OS}}">
         </div>
-        <div class="price-stock">
+        <div class="price-stock rr-bat">
             <label for="RAM">RAM: </label>
             <input type="number" name="RAM" min="1" value="1" required value="{{item.description.RAM}}">
             <label for="ROM">ROM: </label>
             <input type="number" name="ROM" min="8" value="8" required value="{{item.description.ROM}}">
-        </div>
-        <div>
             <label for="battery">Battery: </label>
             <input type="number" name="battery" minlength="4" required value="2000" step="100" value="{{item.description.battery}}">
         </div>
-        <div>
+        <div class="price-stock stretch">
             <label for="camera1">Camera: </label>
             <input type="text" name="camera1" required minlength="3" value="{{item.description.cameras.camera1}}">
         </div>
-        <div>
+        <div class="price-stock stretch">
             <label for="camera2">Camera: </label>
             <input type="text" name="camera2" value="{{item.description.cameras.camera2}}">
         </div>
-        <div>
+        <div class="price-stock stretch">
             <label for="camera3">Camera: </label>
             <input type="text" name="camera3" value="{{item.description.cameras.camera3}}">
         </div>
@@ -52,7 +50,7 @@
         <option value="{{item.category}}">Phones</option>
     </select>
     <div class="price-stock">
-        <label for="price">Price: </label>
+        <label for="price">Price ($): </label>
         <input type="number" name="price" min="1" required value="{{item.price}}">
         <label for="stock">Stock: </label>
         <input type="number" name="stock" min="0" required value="{{item.stock}}">
@@ -64,7 +62,7 @@
 {{else}}
 <form action="" method="POST" class="create-form" enctype="multipart/form-data">
     {{#if errors}}
-    <ul>
+    <ul class="error-list create-form-errors">
         {{#each errors}}
         <li>{{msg}}</li>
         {{/each}}
@@ -73,28 +71,38 @@
     <label for="name">Name:</label>
     <input type="text" name="name" minlength="1" required>
     <fieldset>
-        <legend>Description: </legend>
-        <label for="OS">OS: </label>
-        <input type="text" name="OS" minlength="3" required>
-        <label for="RAM">RAM: </label>
-        <input type="number" name="RAM" min="1" value="1" required>
-        <label for="ROM">ROM: </label>
-        <input type="number" name="ROM" min="8" value="8" required>
-        <label for="battery">Battery: </label>
-        <input type="number" name="battery" minlength="4" required value="2000" step="100">
-        <label for="camera1">Camera: </label>
-        <input type="text" name="camera1" required minlength="3">
-        <label for="camera2">Camera: </label>
-        <input type="text" name="camera2">
-        <label for="camera3">Camera: </label>
-        <input type="text" name="camera3">
+        <legend>&ThickSpace;&ThickSpace;Description:&ThickSpace;&ThickSpace; </legend>
+        <div class="price-stock stretch">
+            <label for="OS">OS: </label>
+            <input type="text" name="OS" minlength="3" required>
+        </div>
+        <div class="price-stock rr-bat">
+            <label for="RAM">RAM: </label>
+            <input type="number" name="RAM" min="1" value="1" required>
+            <label for="ROM">ROM: </label>
+            <input type="number" name="ROM" min="8" value="8" required>
+            <label for="battery">Battery: </label>
+            <input type="number" name="battery" minlength="4" required value="2000" step="100">
+        </div>
+        <div class="price-stock stretch">
+            <label for="camera1">Camera: </label>
+            <input type="text" name="camera1" required minlength="3">
+        </div>
+        <div class="price-stock stretch">
+            <label for="camera2">Camera: </label>
+            <input type="text" name="camera2">
+        </div>
+        <div class="price-stock stretch">
+            <label for="camera3">Camera: </label>
+            <input type="text" name="camera3">
+        </div>
     </fieldset>
     <label for="category">Category: </label>
     <select name="category">
         <option value="{{category._id}}">{{category.name}}</option>
     </select>
     <div class="price-stock">
-        <label for="price">Price: </label>
+        <label for="price">Price ($): </label>
         <input type="number" name="price" min="1" required value="1">
         <label for="stock">Stock: </label>
         <input type="number" name="stock" min="0" required value="0">

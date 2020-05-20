@@ -1,34 +1,53 @@
-<h2>Make changes to {{item.name}}</h2>
-{{#if errors}}
+<h2 class="update-product-title"><span class="light">Make changes to &ThinSpace;</span>{{item.name}}</h2>
 <ul>
-    {{#each errors}}
-    <li>{{msg}}</li>
-    {{/each}}
+    <li>
+        <a class="back-to-categories" href="/catalog/phone">&leftarrow; Back to Phones</a>
+    </li>
+    <li>
+        <a class="back-to-categories" href="/catalog/">&leftarrow; Look at Categories</a>
+    </li>
 </ul>
-{{/if}}
+
 <form action="" method="POST" class="create-form" enctype="multipart/form-data">
+    {{#if errors}}
+    <ul class="error-list create-form-errors">
+        {{#each errors}}
+        <li>{{msg}}</li>
+        {{/each}}
+    </ul>
+    {{/if}}
     <label for="name">Name: </label>
     <input type="text" name="name" required minlength="1" value="{{item.name}}">
     <fieldset>
-        <legend>Description: </legend>
-        <label for="OS">OS: </label>
-        <input type="text" name="OS" minlength="1" required value="{{item.description.OS}}">
-        <label for="RAM">RAM: </label>
-        <input type="number" name="RAM" min="1" required value="{{item.description.RAM}}">
-        <label for="ROM">ROM: </label>
-        <input type="number" name="ROM" min="1" required value="{{item.description.ROM}}">
-        <label for="battery">Battery: </label>
-        <input type="number" name="battery" min="1" required value="{{item.description.battery}}">
-        <label for="camera1">Camera: </label>
-        <input type="text" name="camera1" required minlength="1" value="{{item.description.cameras.camera1}}">
-        {{#if item.description.cameras.camera2}}
-        <label for="camera2">Camera: </label>
-        <input type="text" name="camera2" required minlength="1" value="{{item.description.cameras.camera2}}">
-        {{/if}}
-        {{#if item.description.cameras.camera3}}
-        <label for="camera3">Camera: </label>
-        <input type="text" name="camera3" required minlength="1" value="{{item.description.cameras.camera3}}">
-        {{/if}}
+        <legend> &ThickSpace; &ThickSpace;Description:&ThickSpace;&ThickSpace;  </legend>
+        <div class="price-stock stretch">
+            <label for="OS">OS: </label>
+            <input type="text" name="OS" minlength="1" required value="{{item.description.OS}}">
+        </div>
+        <div class="price-stock rr-bat">
+            <label for="RAM">RAM: </label>
+            <input type="number" name="RAM" min="1" required value="{{item.description.RAM}}">
+            <label for="ROM">ROM: </label>
+            <input type="number" name="ROM" min="1" required value="{{item.description.ROM}}">
+            <label for="battery">Battery: </label>
+            <input type="number" name="battery" min="1" required value="{{item.description.battery}}">
+        </div>
+        <div class="price-stock stretch">
+            <label for="camera1">Camera: </label>
+            <input type="text" name="camera1" required minlength="1" value="{{item.description.cameras.camera1}}">
+        </div>
+        <div class="price-stock stretch">
+            {{#if item.description.cameras.camera2}}
+            <label for="camera2">Camera: </label>
+            <input type="text" name="camera2" required minlength="1" value="{{item.description.cameras.camera2}}">
+            {{/if}}
+        </div>
+        <div class="price-stock stretch">
+            {{#if item.description.cameras.camera3}}
+            <label for="camera3">Camera: </label>
+            <input type="text" name="camera3" required minlength="1" value="{{item.description.cameras.camera3}}">
+            {{/if}}
+        </div>
     </fieldset>
     <label for="category">Category: </label>
     <select name="category">
@@ -38,14 +57,14 @@
     <input type="number" name="price" min="1" required value="{{item.price}}">
     <label for="stock">Stock: </label>
     <input type="number" name="stock" min="0" required value="{{item.stock}}">
-    <p>Current image:</p>
-    <img class="product-image" src="{{item.file_url}}" alt="">
+    <p class="current-image">Current image:</p>
+    <img class="product-image image-update-form" src="{{item.file_url}}" alt="">
     <label for="image">New image:</label>
     <input type="file" name="image">
     <label for="password">Password: </label>
     <input type="password" name="password">
     <div class="confirm-update-contain">
-        <button>Update</button>
+        <button class="add-item">Update</button>
         <button type="button"><a href="/catalog/phones">Back to Phones</a></button>
     </div>
 </form>
