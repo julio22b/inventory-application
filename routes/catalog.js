@@ -8,8 +8,7 @@ const path = require('path');
 const { body } = require('express-validator');
 const multer = require('multer');
 const storage = multer.diskStorage({
-    destination:
-        '/mnt/c/Users/pc/the-odin-project/nodejs-course/inventory-application/public/images',
+    destination: '/images',
     filename: function (req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     },
