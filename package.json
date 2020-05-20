@@ -7,7 +7,7 @@
         "dev": "DEBUG=inventory-application:* nodemon ./bin/www"
     },
     "engines": {
-        "node": "12.6.x"
+        "node": "12.16.3"
     },
     "dependencies": {
         "async": "^3.2.0",
