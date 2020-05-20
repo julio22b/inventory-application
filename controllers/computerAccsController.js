@@ -51,7 +51,7 @@ exports.post_comp_accessory_create = function (req, res, next) {
     }
     const filename = req.file
         ? `/images/${req.file.filename}`
-        : 'https://via.placeholder.com/400.jpg/f1f5f4/516f4e/?text=Product+Doesn%27t+Have+An+Image+Yet';
+        : 'https://via.placeholder.com/300x200.jpg/f1f5f4/516f4e/?text=Product+Doesn%27t+Have+An+Image+Yet';
     Category.findById(category).then((result) => {
         const newAcc = new Keyboard({
             name,

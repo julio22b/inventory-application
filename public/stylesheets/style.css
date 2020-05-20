@@ -13,7 +13,7 @@ a {
 
 body {
   background-color: #f1f5f4;
-  padding-bottom: 50px;
+  min-height: 100vh;
 }
 
 .create-form {
@@ -31,8 +31,8 @@ body {
 }
 
 .product-image {
-  max-width: 300px;
-  height: auto;
+  width: 300px;
+  height: 200px;
 }
 
 h1 {
@@ -186,7 +186,7 @@ section article figcaption p .stock {
 }
 
 .product-detail {
-  position: relative;
+  position: absolute;
   width: 50%;
   left: 50%;
   -webkit-transform: translateX(-50%);
@@ -222,12 +222,15 @@ section article figcaption p .stock {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  width: 100%;
 }
 
 .product-detail figure img {
-  max-width: 70%;
+  width: 70%;
+  height: auto;
   -webkit-box-shadow: 0 0 5px #858585;
           box-shadow: 0 0 5px #858585;
+  max-height: 330px;
 }
 
 .product-detail figure h2 {
@@ -601,4 +604,27 @@ section article figcaption p .stock {
   color: #254425;
   text-decoration: none;
 }
+
+/* footer {
+    padding: 3px 0;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    background-color: $light-green;
+    color: $dark-green;
+    @media screen and (min-width: 770px) {
+        position: absolute;
+    }
+    p {
+        display: flex;
+        align-items: center;
+        text-indent: 2.5em;
+        a {
+            display: flex;
+        }
+        img {
+            margin-left: 10px;
+        }
+    }
+} */
 /*# sourceMappingURL=style.css.map */
