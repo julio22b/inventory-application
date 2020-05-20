@@ -69,7 +69,7 @@ exports.post_comp_accessory_create = function (req, res, next) {
 
 exports.get_comp_accessory_delete = function (req, res, next) {
     Promise.all([Mouse.findById(req.params.id), Keyboard.findById(req.params.id)]).then((found) => {
-        const item = found.filter((doc) => doc !== null);
+        const [item] = found.filter((doc) => doc !== null);
         res.render('delete_computer_acc', { item });
     });
 };
@@ -79,7 +79,7 @@ exports.post_comp_accessory_delete = function (req, res, next) {
     if (!errors.isEmpty()) {
         Promise.all([Mouse.findById(req.params.id), Keyboard.findById(req.params.id)]).then(
             (docs) => {
-                const item = docs.filter((doc) => doc !== null);
+                const [item] = docs.filter((doc) => doc !== null);
                 res.render('delete_computer_acc', { errors: errors.errors, item });
             },
         );

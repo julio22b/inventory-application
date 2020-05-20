@@ -1,5 +1,6 @@
-$dark-green: #254425;
 $light-gray: #f1f5f4;
+$medium-gray: #858585;
+$dark-green: #254425;
 $light-green: #c3e7c9;
 $medium-green: #6f8c6c;
 
@@ -38,7 +39,7 @@ h1 {
     background-color: $light-green;
     font-size: 3.5rem;
     padding: 20px 50px;
-    box-shadow: 0 0 5px 1px #858585;
+    box-shadow: 0 0 5px 1px $medium-gray;
 }
 
 .back-to-categories {
@@ -54,6 +55,9 @@ h2 {
     margin-top: 30px;
     display: flex;
     justify-content: space-between;
+    @media screen and (max-width: 830px) {
+        align-items: flex-end;
+    }
 }
 
 .add-item {
@@ -64,6 +68,10 @@ h2 {
     transition: all 250ms ease-in;
     box-shadow: 0 0 5px $medium-green;
     margin: 5px 0;
+    @media screen and (max-width: 830px) {
+        min-width: 80px;
+        margin-right: -1em;
+    }
     &:hover {
         background-color: $light-green;
     }
@@ -101,13 +109,16 @@ section {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
     margin-top: 4.5em;
+    @media screen and (max-width: 830px) {
+        grid-template-columns: 1fr;
+    }
     article {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         img {
-            box-shadow: 0 0 5px #858585;
+            box-shadow: 0 0 5px $medium-gray;
         }
         figcaption {
             font-size: 1.6rem;
@@ -119,7 +130,7 @@ section {
                     font-weight: bold;
                 }
                 .stock {
-                    color: #858585;
+                    color: $medium-gray;
                 }
             }
         }
@@ -135,13 +146,17 @@ section {
     align-items: center;
     flex-direction: column;
     margin-top: -70px;
+    @media screen and (max-width: 830px) {
+        width: 90%;
+        margin-top: 1em;
+    }
     figure {
         display: flex;
         align-items: center;
         flex-direction: column;
         img {
             max-width: 70%;
-            box-shadow: 0 0 5px #858585;
+            box-shadow: 0 0 5px $medium-gray;
         }
         h2 {
             margin-bottom: 0.3em;
@@ -157,7 +172,7 @@ section {
                     font-weight: bold;
                 }
                 .stock {
-                    color: #858585;
+                    color: $medium-gray;
                 }
             }
             ul {
@@ -198,7 +213,7 @@ section {
 
 .delete-form {
     margin: 3em auto;
-    width: 30%;
+    min-width: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -219,7 +234,9 @@ section {
     .confirm-del-container {
         display: flex;
         justify-content: space-around;
-        width: 40%;
+        width: 20%;
+        min-width: 200px;
+        max-width: 300px;
         margin-top: 20px;
         button {
             padding: 5px 15px;
@@ -260,15 +277,26 @@ section {
 
 .create-form {
     width: 30%;
+    min-width: 420px;
     margin: 0 auto;
     margin-top: -1em;
     position: relative;
+    @media screen and (max-width: 1100px) {
+        width: 60%;
+        min-width: 380px;
+        margin-top: 2em;
+    }
     .create-form-errors {
         position: absolute;
         top: 0;
         right: 0;
         width: 100%;
         transform: translateX(50%);
+        @media screen and (max-width: 1100px) {
+            position: static;
+            transform: translateX(0);
+            margin-bottom: 1.5em;
+        }
     }
     label {
         margin-bottom: 10px;
@@ -326,6 +354,21 @@ section {
             }
         }
         .rr-bat {
+            @media screen and (max-width: 600px) {
+                display: flex;
+                flex-wrap: wrap;
+                label:last-of-type {
+                    margin-left: 30px;
+                    margin-top: 2em;
+                    transform: translateX(-50%);
+                }
+                input {
+                    &:last-child {
+                        min-width: 26%;
+                        transform: translateX(-200%);
+                    }
+                }
+            }
             label {
                 margin-right: 50px;
             }
@@ -354,6 +397,9 @@ section {
 .create-form-title,
 .update-product-title {
     justify-content: center;
+    @media screen and (max-width: 800px) {
+        display: block;
+    }
 }
 
 .current-image {
@@ -362,7 +408,7 @@ section {
 
 .image-update-form {
     margin: 1em auto;
-    box-shadow: 0 0 5px #858585;
+    box-shadow: 0 0 5px $medium-gray;
 }
 
 .confirm-update-contain {
