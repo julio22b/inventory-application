@@ -1,16 +1,18 @@
-<h2>Are you sure you want to remove {{item.name}}?</h2>
-{{#if errors}}
-<ul>
-    {{#each errors}}
-    <li>{{msg}}</li>
-    {{/each}}
-</ul>
-{{/if}}
-<form action="" method="POST">
-    <label for="password">Password: </label>
-    <input type="password" name="password">
+<h2 class="delete-confirmation"><span class="light">Are you sure you want to remove</span> {{item.name}} <span class="light">?</span></h2>
+<form action="" method="POST" class="delete-form">
+    <div>
+        <label for="password">Password: </label>
+        <input type="password" name="password">
+    </div>
     <div class="confirm-del-container">
         <button>Yes</button>
         <button type="button"><a href="/catalog/electronic-devices/">No</a></button>
     </div>
 </form>
+{{#if errors}}
+<ul class="error-list">
+    {{#each errors}}
+    <li>{{msg}}</li>
+    {{/each}}
+</ul>
+{{/if}}

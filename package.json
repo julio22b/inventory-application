@@ -6,6 +6,9 @@
         "start": "node ./bin/www",
         "dev": "DEBUG=inventory-application:* nodemon ./bin/www"
     },
+    "engines": {
+        "node": "6.14.x"
+    },
     "dependencies": {
         "async": "^3.2.0",
         "cookie-parser": "~1.4.4",

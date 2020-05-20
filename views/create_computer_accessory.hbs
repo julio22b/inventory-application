@@ -1,13 +1,22 @@
-<h2>{{title}}</h2>
-{{#if errors}}
+<h2 class="create-form-title">{{title}}</h2>
 <ul>
-    {{#each errors}}
-    <li>{{msg}}</li>
-    {{/each}}
+    <li>
+        <a class="back-to-categories" href="/catalog/computer-accessories">&leftarrow; Back to Computer Accessories</a>
+    </li>
+    <li>
+        <a class="back-to-categories" href="/catalog/">&leftarrow; Look at Categories</a>
+    </li>
 </ul>
-{{/if}}
+
 {{#if item}}
 <form action="" method="POST" class="create-form" enctype="multipart/form-data">
+    {{#if errors}}
+    <ul class="error-list create-form-errors">
+        {{#each errors}}
+        <li>{{msg}}</li>
+        {{/each}}
+    </ul>
+    {{/if}}
     <label for="name">Name: </label>
     <input type="text" name="name" required minlength="1" value="{{item.name}}">
     <label for="description">Description: </label>
@@ -15,16 +24,25 @@
     <select name="category">
         <option value="{{item.category}}">Computer Accessories</option>
     </select>    
-    <label for="price">Price:</label>
-    <input type="number" name="price" required min="1" value="{{item.price}}">
-    <label for="stock">Stock: </label>
-    <input type="number" name="stock" required min="0" value="{{item.stock}}">
+    <div class="price-stock">
+        <label for="price">Price:</label>
+        <input type="number" name="price" required min="1" value="{{item.price}}">
+        <label for="stock">Stock: </label>
+        <input type="number" name="stock" required min="0" value="{{item.stock}}">
+    </div>
     <label for="image">Image: </label>
     <input type="file" name="image">
     <button>Add</button>
 </form>
 {{else}}
 <form action="" method="POST" class="create-form" enctype="multipart/form-data">
+    {{#if errors}}
+    <ul class="error-list create-form-errors">
+        {{#each errors}}
+        <li>{{msg}}</li>
+        {{/each}}
+    </ul>
+    {{/if}}
     <label for="name">Name: </label>
     <input type="text" name="name" required minlength="1">
     <label for="description">Description: </label>
@@ -32,10 +50,12 @@
     <select name="category">
         <option value="{{category._id}}">{{category.name}}</option>
     </select>    
-    <label for="price">Price:</label>
-    <input type="number" name="price" required min="1" value="1">
-    <label for="stock">Stock: </label>
-    <input type="number" name="stock" required value="0" min="0">
+    <div class="price-stock">
+        <label for="price">Price:</label>
+        <input type="number" name="price" required min="1" value="1">
+        <label for="stock">Stock: </label>
+        <input type="number" name="stock" required value="0" min="0">
+    </div>
     <label for="image">Image: </label>
     <input type="file" name="image">
     <button>Add</button>

@@ -1,43 +1,18 @@
-<h2><p>{{title}} available</p> <a href="/catalog/electronic-devices/create">Add item</a></h2>
-<section>
-    {{#each modem_list}}
-    <article>
-        <h4><a href="{{url}}">{{name}}</a></h4>
-        {{#if description}}
-        <p>{{description}}.</p>
-        {{else}}
-        <p>No description has been provided for this item.</p>
-        {{/if}}
-        <p><span class="price">{{price}}</span> | <span class="stock">Stock: {{stock}}</span></p>
-    </article>
-    {{/each}}
-</section>
+<h2><p>{{title}} available</p> <button class="add-item" type="button"><a href="/catalog/electronic-devices/create">Add item</a></button></h2>
+<a class="back-to-categories" href="/catalog/">&leftarrow; Look at Categories</a>
 <section>
     {{#each tv_list}}
     <article>
-        <h4><a href="{{url}}">{{name}}</a></h4>
-        {{#if description}}
-        <p>{{description}}.</p>
-        {{else}}
-        <p>No description has been provided for this item.</p>
-        {{/if}}
-        <p><span class="price">{{price}}</span> | <span class="stock">Stock: {{stock}}</span></p>
+        <figure>
+            <a href="{{url}}">
+                <img class="product-image" src="{{file_url}}" alt="">
+            </a>
+            <figcaption>
+                <h4><a href="{{url}}">{{name}}</a></h4>
+                <p><span class="price">Price: ${{price}}</span> &ThickSpace;|&ThickSpace; <span class="stock">Stock: {{stock}}</span></p>
+            </figcaption>
+        </figure>        
     </article>
     {{/each}}
 </section>
-<section>
-    {{#each laptop_list}}
-    <article>
-        <h4><a href="{{url}}">{{name}}</a></h4>
-        <ul>
-            <li>OS: {{description.OS}}</li>
-            <li>RAM: {{description.RAM}}</li>
-            <li>Storage: {{description.hard_disk}}</li>
-            <li>CPU: {{description.CPU}}</li>
-            <li>GPU: {{description.GPU}}</li>
-        </ul>
-        <p><span class="price">{{price}}</span> | <span class="stock">Stock: {{stock}}</span></p>
-    </article>
-    {{/each}}
-</section>
-<a href="/catalog/">&leftarrow; Look at Categories</a>
+

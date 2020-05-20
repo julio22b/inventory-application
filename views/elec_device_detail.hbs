@@ -1,11 +1,23 @@
+<ul>
+    <li><a class="back-to-categories" href="/catalog/electronic-devices">&leftarrow; Back to Electronic Devices</a></li>
+    <li><a class="back-to-categories" href="/catalog/">&leftarrow; Back to Categories</a></li>
+</ul>
+<article class="product-detail">
+    <figure>
+        <h2>{{item.name}}</h2>
+        <img class="product-image" src="{{item.file_url}}" alt="">
+        <figcaption>
+            {{#if item.description}}
+            <p>{{item.description}}.</p>
+            {{else}}
+            <p>No description has been provided for this item.</p>
+            {{/if}}
+            <p><span class="price">Price: ${{item.price}}</span> &ThickSpace;|&ThickSpace; <span class="stock">Stock: {{item.stock}}</span></p>
+        </figcaption>
+    </figure>
+    <div class="update-delete-container">
+        <button class="update add-item"><a href="{{item.url}}/update">Update</a></button>
+        <button class="delete add-item"><a href="{{item.url}}/delete">Delete</a></button>
+    </div>
+</article>  
 
-<article>
-    <h2>{{item.name}}</h2>
-    <img class="product-image" src="{{item.file_url}}" alt="">
-    <p>{{item.description}}</p>
-    <p><span class="price">{{item.price}}</span> | <span class="stock">Stock: {{item.stock}}</span></p>
-</article>
-<div class="update-delete-container">
-    <button class="update"><a href="{{item.url}}/update">Update</a></button>
-    <button class="delete"><a href="{{item.url}}/delete">Delete</a></button>
-</div>

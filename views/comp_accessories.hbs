@@ -1,20 +1,35 @@
-<h2><p>{{title}} available</p> <p><a href="/catalog/computer-accessories/create">Add item</a></p></h2>
+<div>
+<h2><p>{{title}} available</p> <button class="add-item" type="button"><a href="/catalog/computer-accessories/create">Add item</a></button></h2>
+<a class="back-to-categories" href="/catalog/">&leftarrow; Look at Categories</a>
+
+</div>
+
 <section>
     {{#each keyboard_list}}
     <article>
-        <h4><a href="{{url}}">{{name}}</a></h4>
-        <img class="product-image" src="{{file_url}}" alt="">
-        <p><span class="price">{{price}}</span> | <span class="stock">Stock: {{stock}}</span></p>
+        <figure>
+            <a href="{{url}}">
+                <img class="product-image" src="{{file_url}}" alt="">
+            </a>
+            <figcaption>
+                <h4><a href="{{url}}">{{name}}</a></h4>
+                <p><span class="price">Price: ${{price}}</span> &ThickSpace;|&ThickSpace; <span class="stock">Stock: {{stock}}</span></p>
+            </figcaption>
+        </figure>     
     </article>
     {{/each}}
-</section>
-<section>
     {{#each mice_list}}
     <article>
-        <h4><a href="{{url}}">{{name}}</a></h4>
-        <img class="product-image" src="{{file_url}}" alt="">
-        <p><span class="price">{{price}}</span> | <span class="stock">Stock: {{stock}}</span></p>
+        <figure>
+            <a href="{{url}}">
+                <img class="product-image" src="{{file_url}}" alt="">
+            </a>
+            <figcaption>
+                <h4><a href="{{url}}">{{name}}</a></h4>
+                <p><span class="price">Price: ${{price}}</span> &ThickSpace;|&ThickSpace; <span class="stock">Stock: {{stock}}</span></p>
+            </figcaption>
+        </figure>
     </article>
     {{/each}}
 </section>
-<a href="/catalog/">&leftarrow; Look at Categories</a>
+    

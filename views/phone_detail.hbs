@@ -1,24 +1,35 @@
-
-<article>
-    <h2>{{item.name}}</h2>
-    <img class="product-image" src="{{item.file_url}}" alt="">
-    <ul>
-        <li>OS: {{item.description.OS}}</li>
-        <li>RAM: {{item.description.RAM}} GB</li>
-        <li>ROM: {{item.description.ROM}} GB</li>
-        <li>Battery: {{item.description.battery}} mAh</li>
-        <li>Cameras: {{item.description.cameras.camera1}} 
+<ul>
+    <li><a class="back-to-categories" href="/catalog/phones">&leftarrow; Back to Phones</a></li>
+    <li><a class="back-to-categories" href="/catalog/">&leftarrow; Back to Categories</a></li>
+</ul>
+<article class="product-detail">
+    <figure>
+        <h2>{{item.name}}</h2>
+        <img class="product-image" src="{{item.file_url}}" alt="">
+        <figcaption>
+            {{#if item.description}}
+            <ul>
+            <li>OS: <strong>{{item.description.OS}}</strong></li>
+            <li>RAM: <strong>{{item.description.RAM}} GB</strong></li>
+            <li>ROM: <strong>{{item.description.ROM}} GB</strong></li>
+            <li>Battery: <strong>{{item.description.battery}} mAh</strong></li>
+            <li>Cameras: <strong>{{item.description.cameras.camera1}}</strong> 
             {{#if item.description.cameras.camera2}}
-            ,{{item.description.cameras.camera2}} 
+            ,<strong>{{item.description.cameras.camera2}}</strong>
             {{/if}}
             {{#if item.description.cameras.camera3}}
-            ,{{item.description.cameras.camera3}} 
+            ,<strong>{{item.description.cameras.camera3}}</strong> 
             {{/if}}
             </li>
-    </ul>
-    <p><span class="price">{{item.price}}</span> | <span class="stock">Stock: {{item.stock}}</span></p>
+            </ul>
+            {{else}}
+            <p>No description has been provided for this item.</p>
+            {{/if}}
+            <p><span class="price">Price: ${{item.price}}</span> &ThickSpace;|&ThickSpace; <span class="stock">Stock: {{item.stock}}</span></p>
+        </figcaption>
+    </figure>
+    <div class="update-delete-container">
+        <button class="update add-item"><a href="{{item.url}}/update">Update</a></button>
+        <button class="delete add-item"><a href="{{item.url}}/delete">Delete</a></button>
+    </div>
 </article>
-<div class="update-delete-container">
-    <button class="update"><a href="{{item.url}}/update">Update</a></button>
-    <button class="delete"><a href="{{item.url}}/delete">Delete</a></button>
-</div>
