@@ -29,7 +29,7 @@
     <label for="stock">Stock: </label>
     <input type="number" name="stock" required min="0" value="{{item.stock}}">
     <p class="current-image">Current image:</p>
-    <img class="product-image image-update-form" src="{{item.file_url}}" alt="">
+    <img class="product-image image-update-form" src="{{item.file_url}}" onerror="this.onerror=null;this.src='https://via.placeholder.com/300x200.jpg/f1f5f4/516f4e/?text=Product+Doesn%27t+Have+An+Image+Yet';" alt="">
     <label for="image">New image:</label>
     <input type="file" name="image">
     <label for="password">Password: </label>
