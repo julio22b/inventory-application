@@ -40,7 +40,7 @@ exports.post_electronic_device_create = function (req, res, next) {
         return;
     }
     const file_url = req.file
-        ? `/images/${req.file.filename}`
+        ? `/app/tmp/uploads/${req.file.filename}`
         : 'https://via.placeholder.com/300x200.jpg/f1f5f4/516f4e/?text=Product+Doesn%27t+Have+An+Image+Yet';
     Category.findById(category).then((found) => {
         const newDevice = new TV({
@@ -88,7 +88,7 @@ exports.post_elec_device_update = function (req, res, next) {
     const { name, description, category, price, stock } = req.body;
     const errors = validationResult(req);
     TV.findById(req.params.id).then((toUpdate) => {
-        const file_url = !req.file ? toUpdate.file_url : `/images/${req.file.filename}`;
+        const file_url = !req.file ? toUpdate.file_url : `/app/tmp/uploads${req.file.filename}`;
         toUpdate.populate('Category');
         const updated = {
             name,
