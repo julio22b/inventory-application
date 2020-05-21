@@ -25,6 +25,7 @@ body {
 .create-form {
     display: flex;
     flex-direction: column;
+    padding-bottom: 3em;
     textarea {
         resize: none;
     }
