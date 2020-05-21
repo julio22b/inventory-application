@@ -3,6 +3,7 @@ $medium-gray: #858585;
 $dark-green: #254425;
 $light-green: #c3e7c9;
 $medium-green: #6f8c6c;
+$danger-red: #f32a3b;
 
 * {
     margin: 0;
@@ -196,7 +197,7 @@ section {
             margin-right: 20px;
         }
         .delete {
-            background-color: #f32a3b;
+            background-color: $danger-red;
             a:hover {
                 color: $light-green;
             }
@@ -253,7 +254,7 @@ section {
             }
         }
         button:first-child {
-            background-color: #f32a3b;
+            background-color: $danger-red;
             color: $light-green;
             font-weight: bold;
         }
@@ -274,7 +275,7 @@ section {
     transform: translateX(-50%);
     display: flex;
     justify-content: center;
-    color: #f32a3b;
+    color: $danger-red;
     font-weight: bold;
 }
 
