@@ -19,7 +19,7 @@ exports.comp_accessories_list = function (req, res, next) {
 exports.comp_accessory_detail = function (req, res, next) {
     Promise.all([Keyboard.findById(req.params.id), Mouse.findById(req.params.id)]).then((array) => {
         const item = array[0] ? array[0] : array[1];
-        res.render('computer_accessory_detail', { item: item });
+        res.render('computer_accessory_detail', { title: item.name, item });
     });
 };
 
@@ -70,7 +70,7 @@ exports.post_comp_accessory_create = function (req, res, next) {
 exports.get_comp_accessory_delete = function (req, res, next) {
     Promise.all([Mouse.findById(req.params.id), Keyboard.findById(req.params.id)]).then((found) => {
         const [item] = found.filter((doc) => doc !== null);
-        res.render('delete_computer_acc', { item });
+        res.render('delete_computer_acc', { title: item.name, item });
     });
 };
 
@@ -99,7 +99,7 @@ exports.get_comp_accessory_update = function (req, res, next) {
         Keyboard.findById(req.params.id).populate('category'),
     ]).then((found) => {
         const item = found.filter((doc) => doc !== null);
-        res.render('update_computer_acc', { item: item[0] });
+        res.render('update_computer_acc', { title: item.name, item: item[0] });
     });
 };
 

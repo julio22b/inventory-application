@@ -14,8 +14,8 @@ exports.phone_list = function (req, res, next) {
 };
 
 exports.phone_detail = function (req, res, next) {
-    Smartphone.findById(req.params.id).then((arr) => {
-        res.render('phone_detail', { item: arr });
+    Smartphone.findById(req.params.id).then((item) => {
+        res.render('phone_detail', { title: item.name, item });
     });
 };
 
@@ -65,7 +65,7 @@ exports.post_phone_create = function (req, res, next) {
 
 exports.get_phone_delete = function (req, res, next) {
     Smartphone.findById(req.params.id).then((item) => {
-        res.render('delete_phone', { item });
+        res.render('delete_phone', { title: item.name, item });
     });
 };
 
@@ -86,7 +86,7 @@ exports.get_phone_update = function (req, res, next) {
     Smartphone.findById(req.params.id)
         .populate('category')
         .then((item) => {
-            res.render('update_phone', { item });
+            res.render('update_phone', { title: item.name, item });
         });
 };
 

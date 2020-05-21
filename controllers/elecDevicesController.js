@@ -15,7 +15,7 @@ exports.elec_devices_list = function (req, res, next) {
 
 exports.elec_device_detail = function (req, res, next) {
     TV.findById(req.params.id).then((item) => {
-        res.render('elec_device_detail', { item });
+        res.render('elec_device_detail', { title: item.name, item });
     });
 };
 
@@ -59,7 +59,7 @@ exports.post_electronic_device_create = function (req, res, next) {
 
 exports.get_elec_device_delete = function (req, res, next) {
     TV.findById(req.params.id).then((item) => {
-        res.render('delete_elec_device', { item });
+        res.render('delete_elec_device', { item: item.name, item });
     });
 };
 
@@ -80,7 +80,7 @@ exports.get_elec_device_update = function (req, res, next) {
     TV.findById(req.params.id)
         .populate('category')
         .then((item) => {
-            res.render('update_elec_device', { item });
+            res.render('update_elec_device', { title: item.name, item });
         });
 };
 
