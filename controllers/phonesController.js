@@ -28,7 +28,7 @@ exports.get_phone_create = function (req, res, next) {
 exports.post_phone_create = function (req, res, next) {
     const errors = validationResult(req);
     const file_url = req.file
-        ? `/app/public/images/${req.file.filename}`
+        ? `./public/images/${req.file.filename}`
         : 'https://via.placeholder.com/300x200.jpg/f1f5f4/516f4e/?text=Product+Doesn%27t+Have+An+Image+Yet';
     const cameras = {
         camera1: req.body.camera1,
@@ -106,7 +106,7 @@ exports.post_phone_update = function (req, res, next) {
     };
 
     Smartphone.findById(req.params.id).then((toUpdate) => {
-        const file_url = !req.file ? toUpdate.file_url : `/app/public/images/${req.file.filename}`;
+        const file_url = !req.file ? toUpdate.file_url : `./public/images/${req.file.filename}`;
         toUpdate.populate('Category');
         const updatedPhone = {
             name: req.body.name,
