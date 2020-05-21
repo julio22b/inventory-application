@@ -50,7 +50,7 @@ exports.post_comp_accessory_create = function (req, res, next) {
         return;
     }
     const filename = req.file
-        ? `./public/images/${req.file.filename}`
+        ? `/images/${req.file.filename}`
         : 'https://via.placeholder.com/300x200.jpg/f1f5f4/516f4e/?text=Product+Doesn%27t+Have+An+Image+Yet';
     Category.findById(category).then((result) => {
         const newAcc = new Keyboard({
@@ -110,7 +110,7 @@ exports.post_comp_accessory_update = function (req, res, next) {
     Promise.all([Mouse.findById(req.params.id), Keyboard.findById(req.params.id)]).then(
         (results) => {
             const [toUpdate] = results.filter((doc) => doc !== null);
-            const file_url = !req.file ? toUpdate.file_url : `./public/images/${req.file.filename}`;
+            const file_url = !req.file ? toUpdate.file_url : `/images/${req.file.filename}`;
             toUpdate.populate('Category');
             const newAcc = {
                 name,
