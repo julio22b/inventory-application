@@ -480,6 +480,7 @@ section article figcaption p .stock {
   padding: 7px 0;
   font-weight: bold;
   font-size: 1.3rem;
+  cursor: pointer;
 }
 
 .create-form fieldset {
