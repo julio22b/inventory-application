@@ -1,10 +1,17 @@
 <h2>{{title}}</h2>
-<dl class="category-list">
+<section class="category-list">
     {{#each category_list}}
-    <dt><a href="{{url}}">{{name}}</a></dt>
-    <dd>&mdash; {{description}}.</dd>
+    <figure>
+        <a href="{{url}}">
+            <img src="{{file_url}}" alt="">
+            <figcaption>
+                <p class="cat-title">{{name}}</p>
+                <p class="cat-desc">&mdash; {{description}}.</p>
+            </figcaption>
+        </a>
+    </figure>
     {{/each}}
-</dl>
-{{!-- <footer>
+</section>
+<footer>
     <p>Made by Julio Bermudez <a href="https://github.com/julio22b"><img src="/images/iconmonstr-github-1-24.png" alt="github icon"></a></p>
-</footer> --}}
+</footer>
