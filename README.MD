@@ -1,6 +1,6 @@
 #### Demo: https://inventory-app-top.herokuapp.com/
 
-### Basic Inventory App with CRUD actions
+### A CRUD Inventory App
 
 This is part of The Odin Project's NodeJS course. In this app, the users can navigate through categories and look at items which they can update or delete (with a password) or create new ones.
 
